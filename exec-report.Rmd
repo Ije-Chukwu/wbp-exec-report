@@ -1,9 +1,11 @@
 ---
-title: "exec-report"
+title: "Professional Work-Based Placement Executive Report"
+ subtitle: "Data collection, synthesis and Analysis of Gender Inequality in LMICs using DHS and IPUMS-DHS Data"
 author: "Ijeoma"
 date: "2025-08-26"
 output: html_document
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -12,13 +14,149 @@ to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
 if (length(to_install))install.packages(to_install)
 lapply(packages,library,character.only=TRUE)
 
-knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# R Markdown
-```{r}
+## Background Summary
 
-```
+### About BDHS Group
+
+### About DHS and IPUMS-DHS
+
+### Project Overview
+Connecting BDHS Group and IPUMS-DHS Data and the role I have to play
+
+This is a professional work-based placement project, with the Biostatistics and Health Data Science group, UoA which aims to gather, organise and analyse, publicly available demographic and health-related datasets from The Demographic and Health Surveys(DHS) program that are relevant to global health research topics being worked on by the Biostatistics and Health Data science UoA group. This is to mitigate the recent suspension of the dhs program, hence limiting access to only existing registered users as new registerations/data requests are not being accepted.
+
+The Demographic and Health Surveys(DHS) program collects nationally representative data on population, health, and nutrition across developing countries (LMIC). IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS), enabling cross-country and trend analyses over time. It provides free access to integrated microdata on health, fertility, family planning, and more.
+
+Learn more at the [The DHS Program](https://dhsprogram.com) , [IPUMS-DHS website](https://www.idhsdata.org/idhs/).
+
+To access datasets, register for an account on the [IPUMS-DHS website](https://www.idhsdata.org/idhs/apply).
+
+## Project Aim
+The project aims is two-fold
+1. Create a global health data repository of DHS Datasets for 40 years (1984-2022)
+2. Carry out a pooled-cross country (LMIC) exploratory analysis of Gender Inequalities in women of child bearing age.
+
+
+
+##Method
+
+### Autodownload_Workflow
+A structured workflow which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads, enabling seamless data retrieval for collaborative research. This repository is designes to support global health studies by providing structured reproducible scripts that ensure secure data access, automate doenloads, and systematically oraganize datasets for pooled cross-country analysis.
+
+### Exploratory Data Analysis of Gender Inequalities
+- Dataset overview
+- IPV
+- FGM
+- AHCDM
+  
+---
+
+## Outcomes
+
+- Autodownload scripts for DHS Datasets
+- Variable mappings (DHS and IPUMS-DHS)
+- EDA Rmarkdown scripts
+- SPSS EDA Syntax files
+- SPSS EDA Outputs
+- SPSS Syntax file for pilot file merge (Kenya-Tanzania DHS IR Files 2021)
+- Documentation and reproducible workflows for IPUMS-DHS file merge
+
+ **Prerequisite:**  
+- DHS login details: Register for an account on the [IPUMS-DHS website](https://www.idhsdata.org/idhs/apply) to access datasets
+
+## Implications for the Organisation
+
+
+
+
+
+Pay attention to the following:
+Assessment targets
+Learning Outcomes 4&7
+4.	Demonstrate evidence of the application of academic and technical skills in the workplace, including collection of relevant data, synthesis, analysis and interpretation;
+
+Academic skills in the workplace to highlight.
+- collection of relevant data: DHS, IPUM-DHS data access and download
+- synthesis: data wrangling, variable mapping, dataset merging
+- analysis and interpretation; EDA, visualisation, reporting
+- Reproducibility: Use of Rmarkdown with adequate documentation, version control and renv. setting ensured, SPSS syntax documented for every step of the analysis carried out on spss.
+-data security and ethical considerations: Data accessed with secure login details, data stored on secure UoA servers, no data shared with third parties.
+-data quality checks: Missing data, outliers, duplicates, inconsistencies
+
+
+7.	Clearly communicate data science outputs to relevant stakeholders.
+- Communication template: Rmarkdown, SPSS syntax, documentation
+- Communication Channel: Email, Power-point Presentation
+- Reporting: Executive report, EDA reports
+- Visualisation: Plotly, ggplot2
+
+
+
+
+## Part A. Main report
+Your submission should evidence the application of academic skills in the workplace and the PDF
+report should include relevant coverage on of the following:
+
+* background/context of your project,
+* the aim,
+* methods,
+* result(s)/product(s) and 
+* the implications of your work for the organisation.
+
+
+## Part B. Appraisal
+The appraisal process provides an opportunity for you to reflect on your professional development
+and progress, to review achievements and identify any new training and development requirements.
+This part of the template can be extracted and sent to your host for input.
+Section One: General reflections
+Looking back over the last ten weeks:
+• What do you feel has gone well for you in relation to the placement? Are there any
+achievements that you would like to highlight?
+• What do you feel hasn’t gone so well? Are there any difficulties that you can highlight?
+• Do you feel that your role changed substantially during the placement? If so, please give
+examples. If not, please say why not.
+
+
+
+Pay Attention to Marking Criteria Below
+
+## Distinction (A)/Commendation (B)
+Criteria	Weighting	Exceeds expectations
+### Synthesis of Work-Based Placement Activities(50%)
+
+Skilfully integrates and synthesises work-based placement activities, culminating in an output that fully meets the requirements of the host organisation.
+### Professional Quality of Output (30%)
+Structures the output logically and cohesively, with a clear organisation and style appropriate to the content and audience. Information is presented in a professional manner with attention to detail.
+
+### Academic Appraisal (20%)
+Demonstrates exceptional proficiency across all assessed skills/attributes, consistently exceeding expectations and driving positive outcomes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
