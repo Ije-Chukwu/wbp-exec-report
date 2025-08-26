@@ -1,0 +1,26 @@
+---
+title: "exec-report"
+author: "Ijeoma"
+date: "2025-08-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+packages<- c("rmarkdown","knitr","dplyr","plotly","readxl")
+to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
+if (length(to_install))install.packages(to_install)
+lapply(packages,library,character.only=TRUE)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+```{r}
+
+```
+
+
+
+
+
