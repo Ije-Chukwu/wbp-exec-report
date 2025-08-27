@@ -1,6 +1,7 @@
 ---
-title: "     "
+title: '     '
 output:
+  word_document: default
   html_document:
     css: justify.css
 ---
@@ -44,11 +45,10 @@ cat('<hr>
 </div>')
 ```
 
--   About BDHS Group
+### Part A. Main report:
+Evidencing academic skills in the workplace including collection of relevant data, synthesis, analysis and interpretation; and clearly communicating data science outputs to relevant stakeholders.
 
--   About DHS and IPUMS-DHS
-
-### Project Background
+#### Project Background
 
 The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the [The DHS Program](https://dhsprogram.com).
 
@@ -60,18 +60,18 @@ Access was given to me using my supervisor's login to carry out my data acquisit
 
 To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
 
-## Project Aim
+#### Project Aim
 
 This project achieved two aims
 
 1.  Created a global health data repository of DHS Datasets for 38 years (1984-2022)
 2.  Pooled Cross country Exploratory Data Analysis of Gender Inequalities in women of child bearing age.
 
-## Methods
+#### Methods
 The project was carried out in two phases:
 Documentation was ensured all through the project wth provides clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
 
-### Autodownload_Workflow
+##### Autodownload_Workflow
 
 A structured workflow which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was scripted using R Markdown, enabling seamless data retrieval for collaborative research. This repository is designes to support global health studies by providing structured reproducible scripts that ensure secure data access, automate downloads, and systematically oraganize datasets for pooled cross-country analysis.
 
@@ -82,7 +82,7 @@ The workflow includes the following key components:
 -   
 
 
-### IPUMS-DHS File Merge Workflow
+##### IPUMS-DHS File Merge Workflow
 A structured workflow for merging IPUMS-DHS datasets from multiple countries and years was scripted using R Markdown, enabling seamless integration of harmonized data for comprehensive cross-country analysis. This repository is designed to support global health studies by providing structured reproducible scripts that ensure efficient data merging, variable mapping, and dataset management.
 
 The workflow includes the following key components:
@@ -91,7 +91,7 @@ The workflow includes the following key components:
 -   Data merging: Combines datasets from multiple countries and years into a single comprehensive dataset for analysis.
 -   Documentation: Provides clear instructions and documentation to facilitate use by other researchers.
 
-### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
+##### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
 
 -   Dataset overview
 -   IPV
@@ -100,7 +100,7 @@ The workflow includes the following key components:
 
 ------------------------------------------------------------------------
 
-## Outcomes
+#### Outcomes
 
 -   Autodownload scripts for DHS Datasets
 -   Variable mappings (DHS and IPUMS-DHS)
@@ -111,7 +111,7 @@ The workflow includes the following key components:
 -   Documentation and reproducible workflows for IPUMS-DHS file merge
 
 
-## Implications for the Organisation:
+#### Implications for the Organisation:
 -   The Autodownload workflow can be used by the team to access and download datasets from DHS program website for future research projects
 -   The IPUMS-DHS file merge workflow can be used by the team to merge IR datasets from IPUMS-DHS website for future research projects.
 -   The EDA scripts can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets for future research projects.
@@ -120,9 +120,11 @@ The workflow includes the following key components:
 -  The SPSS syntax files can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets using SPSS as well as verify results without having to perform the analysis from scratch.
 
 
+------------------------------------------------------------------------
 
+Pay attention to the following: Assessment targets Learning Outcomes 4&7
 
-Pay attention to the following: Assessment targets Learning Outcomes 4&7 4. Demonstrate evidence of the application of academic and technical skills in the workplace, including collection of relevant data, synthesis, analysis and interpretation;
+4. Demonstrate evidence of the application of academic and technical skills in the workplace, including collection of relevant data, synthesis, analysis and interpretation;
 
 
 ### Academic skills in the workplace to highlight.
@@ -138,18 +140,13 @@ Pay attention to the following: Assessment targets Learning Outcomes 4&7 4. Demo
 -   Reporting: Executive report, EDA reports
 -   Visualisation: Plotly, ggplot2
 
-## Part A. Main report
+------------------------------------------------------------------------
 
-Your submission should evidence the application of academic skills in the workplace and the PDF report should include relevant coverage on of the following:
 
--   background/context of your project,
--   the aim,
--   methods,
--   result(s)/product(s) and
--   the implications of your work for the organisation.
 
-## Part B. Appraisal
-### What Has Gone Well
+
+### Part B. Appraisal
+#### What Has Gone Well
 
 - *Balance between promoting independent work, collaborative work and the right amount of supervisory support to keep me on track:* This enabled me to grow confident in taking initiatives to explore solutions to problems and present them while escalating the challenge and then receiving feedbacks based on how to proceed. This is a more proactive approach to problem solving rather than escallating a problem and waiting for the solution to be handed to me which is more passive.It has also helped me hone in on my critical thinking skills.
 The collaborative phase of the project helped me appreciate the gains of working as a team including, knowledge sharing and feedback which reinforces learning, unified objective and checking each other which ensures progress. I also learnt that skills/proficiency within the team might ot be evenly distributed which leads to uneven shared workload which can further lead to very minimal or no contribution to the objectives from team members with less workload.
@@ -162,14 +159,14 @@ The collaborative phase of the project helped me appreciate the gains of working
  
  
 
-### What hasn't gone so well.
+#### What hasn't gone so well.
 - *Storage challenge due to data volume:* A more harmonized IPUMS DHS dataset requiring less computational resource was used, hence optimizing available memory space.
 - *Personal device limitation:* My personal device was limited in capacity and speed to handle the large data set which lagged it down making me to resort to using the instituion devices. I had to trade off the felxibility of working remotely with the better functionality and efficiency of using the school compuetrs. While this seemed like a constraint, it helped me hone my skills in the use of Github for version control, tracking and checking reproducibility of my analysis across devices.
 - *Time constraint:* I was constrained by time to reduce the scope of my project which included reducing the file merging activity of sall DHS IR datasets to a pilot merge of IR Datasets from two countries with syntax that are reproducible for datasets with similar variable set. Mitigated by compressed work scope.
 
 
 
-### Achievement Highl8ght:
+#### Achievement Highlight:
 - Improved confidence towards challenges
 - Developed problem solving skills
 - Ability to identify and deal with rotten tomatoes (dissapointment): Identify,isolate, address, refocus
@@ -181,7 +178,7 @@ The collaborative phase of the project helped me appreciate the gains of working
 - Ability to prioritize tasks based on objectives and timeline
 
 
-Role Change:
+#### Role Change:
 Agreed roles from the signed roles and responsibilty agreement was consistent all throug the program, however dataset specified for the project was changed at the analysis phase from DHS to IPUMS-DHS.
 
 The reason for this change was limited storage, affecting only the dataset.This however, gave me the opportunity to apply database management skills and develop best practices in file documentation.
