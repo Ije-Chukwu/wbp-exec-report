@@ -32,19 +32,28 @@ if (length(to_install))install.packages(to_install)
 lapply(packages,library,character.only=TRUE)
 
 ```
+
 ### Data collection, synthesis and Analysis of Gender Inequality in LMICs using DHS and IPUMS-DHS Data
 
-* Background Summary
+```{r, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
+cat('<hr>
+<div style="text-align: left; font-size: 16px; margin-top: 30px;">
+  <em>Author: Ijeoma<br>
+  Date: 2025-08-26</em>
+</div>')
+```
 
 * About BDHS Group
 
 * About DHS and IPUMS-DHS
 
-### Project Overview
+### Project Background
 
-Connecting BDHS Group and IPUMS-DHS Data and the role I have to play
+The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the DHS Program.
 
-This is a professional work-based placement project, with the Biostatistics and Health Data Science group, UoA which aims to gather, organise and analyse, publicly available demographic and health-related datasets from The Demographic and Health Surveys(DHS) program that are relevant to global health research topics being worked on by the Biostatistics and Health Data science UoA group. This is to mitigate the recent suspension of the dhs program, hence limiting access to only existing registered users as new registerations/data requests are not being accepted.
+The DHS Program, funded by USAID collects nationally representative global health data and uses it to monitor and evaluate population, health, and nutrition porgrams which is in line with SDG....... 
+
+However, the DHS Program has been suspended and currently undergoing review for further funding. During the period of this review, new registerations are not being accepted, hence restricting access to datasets in addition to other far-reaching effect as highlighted by (cite when data goes dark). This professional work-based placement project, with the Biostatistics and Health Data Science group, UoA, aims to gather, synthesize and analyse, datasets from Demographic and Health Surveys(DHS) program that are relevant to global health projects relevant to the team. This is to mitigate the recent suspension of the dhs program, hence limiting access to only existing registered users as new registerations/data requests are not being accepted.
 
 The Demographic and Health Surveys(DHS) program collects nationally representative data on population, health, and nutrition across developing countries (LMIC). IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS), enabling cross-country and trend analyses over time. It provides free access to integrated microdata on health, fertility, family planning, and more.
 
@@ -124,5 +133,10 @@ Skilfully integrates and synthesises work-based placement activities, culminatin
 Demonstrates exceptional proficiency across all assessed skills/attributes, consistently exceeding expectations and driving positive outcomes.
 
 
+<hr>
+<div style="text-align: left; font-size: 16px; margin-top: 30px;">
+  Author: Ijeoma<br>
+  Date: 2025-08-26
+</div>
 
----
+
