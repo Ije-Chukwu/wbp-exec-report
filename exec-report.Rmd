@@ -22,7 +22,8 @@ cat('
 </table>
 ')
 ```
----
+
+------------------------------------------------------------------------
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -43,35 +44,53 @@ cat('<hr>
 </div>')
 ```
 
-* About BDHS Group
+-   About BDHS Group
 
-* About DHS and IPUMS-DHS
+-   About DHS and IPUMS-DHS
 
 ### Project Background
 
-The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the DHS Program.
+The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the [The DHS Program](https://dhsprogram.com).
 
-The DHS Program, funded by USAID collects nationally representative global health data and uses it to monitor and evaluate population, health, and nutrition porgrams which is in line with SDG....... 
+The DHS Program, funded by USAID collects nationally representative global health data and uses it to monitor and evaluate population, health, and nutrition porgrams which is in line with SDG.......
 
 However, the DHS Program has been suspended and currently undergoing review for further funding. During the period of this review, new registerations are not being accepted, hence restricting access to datasets in addition to other far-reaching effect as highlighted by (cite when data goes dark). This professional work-based placement project, with the Biostatistics and Health Data Science group, UoA, aims to gather, synthesize and analyse, datasets from Demographic and Health Surveys(DHS) program that are relevant to global health projects relevant to the team. This is to mitigate the recent suspension of the dhs program, hence limiting access to only existing registered users as new registerations/data requests are not being accepted.
 
-The Demographic and Health Surveys(DHS) program collects nationally representative data on population, health, and nutrition across developing countries (LMIC). IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS), enabling cross-country and trend analyses over time. It provides free access to integrated microdata on health, fertility, family planning, and more.
+Access was given to me using my supervisor's login to carry out my data acquisition from DHS Program website, however, Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) as merging of DHS datasets was not feasible due to memory and time constraint. IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS) across countries and over time. The integrated microdata extracted from IPUMS-DHS enables cross-country and trend analyses over time. The data is free to use for research and teaching purposes, however, users must register for an account and agree to the terms of use.
 
-Learn more at the [The DHS Program](https://dhsprogram.com) , [IPUMS-DHS website](https://www.idhsdata.org/idhs/).
-
-To access datasets, register for an account on the [IPUMS-DHS website](https://www.idhsdata.org/idhs/apply).
+To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
 
 ## Project Aim
 
-The project aims is two-fold 1. Create a global health data repository of DHS Datasets for 40 years (1984-2022) 2. Carry out a pooled-cross country (LMIC) exploratory analysis of Gender Inequalities in women of child bearing age.
+This project achieved two aims
 
-##Method
+1.  Created a global health data repository of DHS Datasets for 38 years (1984-2022)
+2.  Pooled Cross country Exploratory Data Analysis of Gender Inequalities in women of child bearing age.
+
+##Methods
+The project was carried out in two phases
 
 ### Autodownload_Workflow
 
-A structured workflow which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads, enabling seamless data retrieval for collaborative research. This repository is designes to support global health studies by providing structured reproducible scripts that ensure secure data access, automate doenloads, and systematically oraganize datasets for pooled cross-country analysis.
+A structured workflow which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was scripted using R Markdown, enabling seamless data retrieval for collaborative research. This repository is designes to support global health studies by providing structured reproducible scripts that ensure secure data access, automate downloads, and systematically oraganize datasets for pooled cross-country analysis.
 
-### Exploratory Data Analysis of Gender Inequalities
+The workflow includes the following key components:
+-   Secure data access: Utilizes DHS login credentials to authenticate and access datasets.
+-   Automated downloads: Scripts to automatically download specified datasets based on user-defined parameters (e.g., country, year, survey type).
+-   Data organization: Systematically organizes downloaded datasets into a structured directory for easy access and management.
+-   Documentation: Provides clear instructions and documentation to facilitate use by other researchers.
+
+
+### IPUMS-DHS File Merge Workflow
+A structured workflow for merging IPUMS-DHS datasets from multiple countries and years was scripted using R Markdown, enabling seamless integration of harmonized data for comprehensive cross-country analysis. This repository is designed to support global health studies by providing structured reproducible scripts that ensure efficient data merging, variable mapping, and dataset management.
+
+The workflow includes the following key components:
+-   Data import: Scripts to import IPUMS-DHS datasets based on user-defined parameters (e.g., country, year).
+-   Variable mapping: Aligns variables across different datasets to ensure consistency and comparability.
+-   Data merging: Combines datasets from multiple countries and years into a single comprehensive dataset for analysis.
+-   Documentation: Provides clear instructions and documentation to facilitate use by other researchers.
+
+### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
 
 -   Dataset overview
 -   IPV
@@ -90,8 +109,6 @@ A structured workflow which serves as a comprehensive toolkit for accessing, pro
 -   SPSS Syntax file for pilot file merge (Kenya-Tanzania DHS IR Files 2021)
 -   Documentation and reproducible workflows for IPUMS-DHS file merge
 
-**Prerequisite:**\
-- DHS login details: Register for an account on the [IPUMS-DHS website](https://www.idhsdata.org/idhs/apply) to access datasets
 
 ## Implications for the Organisation
 
@@ -118,25 +135,29 @@ Your submission should evidence the application of academic skills in the workpl
 
 ## Part B. Appraisal
 
-The appraisal process provides an opportunity for you to reflect on your professional development and progress, to review achievements and identify any new training and development requirements. This part of the template can be extracted and sent to your host for input. Section One: General reflections Looking back over the last ten weeks: • What do you feel has gone well for you in relation to the placement? Are there any achievements that you would like to highlight? • What do you feel hasn’t gone so well? Are there any difficulties that you can highlight? • Do you feel that your role changed substantially during the placement? If so, please give examples. If not, please say why not.
+The appraisal process provides an opportunity for you to reflect on your professional development and progress, to review achievements and identify any new training and development requirements. This part of the template can be extracted and sent to your host for input. Section One: General reflections Looking back over the last ten weeks: * What do you feel has gone well for you in relation to the placement? Are there any achievements that you would like to highlight?
+* What do you feel hasn’t gone so well? Are there any difficulties that you can highlight?
+* Do you feel that your role changed substantially during the placement? If so, please give examples. If not, please say why not.
 
 Pay Attention to Marking Criteria Below
 
+
 ## Distinction (A)/Commendation (B)
 
-Criteria Weighting Exceeds expectations \### Synthesis of Work-Based Placement Activities(50%)
+Criteria Weighting Exceeds expectations
+### Synthesis of Work-Based Placement Activities(50%)
 
-Skilfully integrates and synthesises work-based placement activities, culminating in an output that fully meets the requirements of the host organisation. \### Professional Quality of Output (30%) Structures the output logically and cohesively, with a clear organisation and style appropriate to the content and audience. Information is presented in a professional manner with attention to detail.
+Skilfully integrates and synthesises work-based placement activities, culminating in an output that fully meets the requirements of the host organisation.
+
+### Professional Quality of Output (30%)
+Structures the output logically and cohesively, with a clear organisation and style appropriate to the content and audience. Information is presented in a professional manner with attention to detail.
 
 ### Academic Appraisal (20%)
 
 Demonstrates exceptional proficiency across all assessed skills/attributes, consistently exceeding expectations and driving positive outcomes.
 
-
 <hr>
-<div style="text-align: left; font-size: 16px; margin-top: 30px;">
-  Author: Ijeoma<br>
-  Date: 2025-08-26
-</div>
 
-
+::: {style="text-align: left; font-size: 16px; margin-top: 30px;"}
+Author: Ijeoma<br> Date: 2025-08-26
+:::
