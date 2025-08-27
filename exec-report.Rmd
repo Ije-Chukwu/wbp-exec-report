@@ -166,4 +166,21 @@ The collaborative phase of the project helped me appreciate the gains of working
 *What hasn't gone so well*:
 1. Storage challenge due to data volume: A more harmonized IPUMS DHS dataset requiring less computational resource was used, hence optimizing available memory space.
 2. Personal device limitation: My personal device was limited in capacity and speed to handle the large data set which lagged it down making me to resort to using the instituion devices. I had to trade off the felxibility of working remotely with the better functionality and efficiency of using the school compuetrs. While this seemed like a constraint, it helped me hone my skills in the use of Github for version control, tracking and checking reproducibility of my analysis across devices.
-3. Time constraint: I was constrained by time to reduce the scope of my project which included reducing the file merging activity of sall DHS IR datasets to a pilot merge of IR Datasets from two countries with syntax that are reproducible for datasets with similar variable set. Mitigated by compressed work scope
+3. Time constraint: I was constrained by time to reduce the scope of my project which included reducing the file merging activity of sall DHS IR datasets to a pilot merge of IR Datasets from two countries with syntax that are reproducible for datasets with similar variable set. Mitigated by compressed work scope.
+
+Achievement Highlght:
+- Improved confidence towards challenges
+- Developed problem solving skills
+- Ability to identify and deal with rotten tomatoes (dissapointment): Identify,isolate, address, refocus
+- R Skills: Using Plotly and Quarto for interactive visual presentation
+- Documentation:
+- Maintain standards for reproducible science research
+- Github collaboration and version control
+- Adaptability in the workplace
+
+
+Role Change:
+Agreed roles from the signed roles and responsibilty agreement was consistent all throug the program, however dataset specified for the project was changed at the analysis phase from DHS to IPUMS-DHS.
+
+The reason for this change was limited storage, affecting only the dataset.This however, gave me the opportunity to apply database management skills and develop best practices in file documentation.
+
