@@ -149,38 +149,39 @@ Your submission should evidence the application of academic skills in the workpl
 -   the implications of your work for the organisation.
 
 ## Part B. Appraisal
-*What Has Gone Well*
+### What Has Gone Well
 
-1. Balance between promoting independent work, collaborative work and the right amount of supervisory support to keep me on track: This enabled me to grow confident in taking initiatives to explore solutions to problems and present them while escalating the challenge and then receiving feedbacks based on how to proceed. This is a more proactive approach to problem solving rather than escallating a problem and waiting for the solution to be handed to me which is more passive.It has also helped me hone in on my critical thinking skills.
-
+- *Balance between promoting independent work, collaborative work and the right amount of supervisory support to keep me on track:* This enabled me to grow confident in taking initiatives to explore solutions to problems and present them while escalating the challenge and then receiving feedbacks based on how to proceed. This is a more proactive approach to problem solving rather than escallating a problem and waiting for the solution to be handed to me which is more passive.It has also helped me hone in on my critical thinking skills.
 The collaborative phase of the project helped me appreciate the gains of working as a team including, knowledge sharing and feedback which reinforces learning, unified objective and checking each other which ensures progress. I also learnt that skills/proficiency within the team might ot be evenly distributed which leads to uneven shared workload which can further lead to very minimal or no contribution to the objectives from team members with less workload.
 
-2. Access to resource materials and bootcamp trainings: The DHS program website is replete with information about the program, datasets, how to use them along with trainings and resources all of which are very useful, yet can be overwhelming initially, however , the bootcamps trainings provided by my host which delved into microdata analysis for topic specific research and how they are used for analysis as well as result interpretations and implications, helped me to translate and connect these informations to applicable outcomes and usage. Hence eliminating the overwhelm and sparking my curiosity to constantly engage with the resources and every new learning was met with an appreciation for the dept of rigour that goes into global health research
+- *Access to resource materials and bootcamp trainings:* The DHS program website is replete with information about the program, datasets, how to use them along with trainings and resources all of which are very useful, yet can be overwhelming initially, however , the bootcamps trainings provided by my host which delved into microdata analysis for topic specific research and how they are used for analysis as well as result interpretations and implications, helped me to translate and connect these informations to applicable outcomes and usage. Hence eliminating the overwhelm and sparking my curiosity to constantly engage with the resources and every new learning was met with an appreciation for the dept of rigour that goes into global health research
 
-3. Regular Review Meetings with my SUpervisors: I had regular review meetings both physcial and  online with my supervisors and peer which provided clarity on my project tasks, tackled challenges and provided feedback on my progress and arears I needed to work on, all of which were pivotal for my growth.The meetings provided a safe space for me to be innovative as well as share my concerns when stuck and receive guidiance.
+- *Regular Review Meetings with my Supervisors:* I had regular review meetings both physcial and  online with my supervisors and peer which provided clarity on my project tasks, tackled challenges and provided feedback on my progress and arears I needed to work on, all of which were pivotal for my growth.The meetings provided a safe space for me to be innovative as well as share my concerns when stuck and receive guidiance.
 
-4. Workplace wellbeing: A comfortable workspace was provided for me with accessibility to my suppervisors which made me feel included with the team. Also, I was invited to team-wide monthly meetings which helped me familiarize with the team and the nature of work that goes on within an academic research and teaching organisation like the BHDS. This gave me a sense of responsibity as part of a wider unit and made me feel welcome while also challenging me to contribute positively to the team. Additionally, the flexible workhour enabled me to manage my personal commitments with work-based placement activities. Hinderances to my productivity in terms of health and other personal conflicting priorities were properly communicated in a professional manner and was met with empathy and support from my suppervisors which contributed positively to my wellbeing.
+- *Workplace wellbeing:* A comfortable workspace was provided for me with accessibility to my suppervisors which made me feel included with the team. Also, I was invited to team-wide monthly meetings which helped me familiarize with the team and the nature of work that goes on within an academic research and teaching organisation like the BHDS. This gave me a sense of responsibity as part of a wider unit and made me feel welcome while also challenging me to contribute positively to the team. Additionally, the flexible workhour enabled me to manage my personal commitments with work-based placement activities. Hinderances to my productivity in terms of health and other personal conflicting priorities were properly communicated in a professional manner and was met with empathy and support from my suppervisors which contributed positively to my wellbeing.
  
  
 
-*What hasn't gone so well*:
-1. Storage challenge due to data volume: A more harmonized IPUMS DHS dataset requiring less computational resource was used, hence optimizing available memory space.
-2. Personal device limitation: My personal device was limited in capacity and speed to handle the large data set which lagged it down making me to resort to using the instituion devices. I had to trade off the felxibility of working remotely with the better functionality and efficiency of using the school compuetrs. While this seemed like a constraint, it helped me hone my skills in the use of Github for version control, tracking and checking reproducibility of my analysis across devices.
-3. Time constraint: I was constrained by time to reduce the scope of my project which included reducing the file merging activity of sall DHS IR datasets to a pilot merge of IR Datasets from two countries with syntax that are reproducible for datasets with similar variable set. Mitigated by compressed work scope.
+### What hasn't gone so well.
+- *Storage challenge due to data volume:* A more harmonized IPUMS DHS dataset requiring less computational resource was used, hence optimizing available memory space.
+- *Personal device limitation:* My personal device was limited in capacity and speed to handle the large data set which lagged it down making me to resort to using the instituion devices. I had to trade off the felxibility of working remotely with the better functionality and efficiency of using the school compuetrs. While this seemed like a constraint, it helped me hone my skills in the use of Github for version control, tracking and checking reproducibility of my analysis across devices.
+- *Time constraint:* I was constrained by time to reduce the scope of my project which included reducing the file merging activity of sall DHS IR datasets to a pilot merge of IR Datasets from two countries with syntax that are reproducible for datasets with similar variable set. Mitigated by compressed work scope.
 
-Achievement Highlght:
+
+
+### Achievement Highl8ght:
 - Improved confidence towards challenges
 - Developed problem solving skills
 - Ability to identify and deal with rotten tomatoes (dissapointment): Identify,isolate, address, refocus
 - R Skills: Using Plotly and Quarto for interactive visual presentation
-- Documentation:
+- Documentation: Good practise for collaborative science
 - Maintain standards for reproducible science research
 - Github collaboration and version control
-- Adaptability in the workplace
+- Adaptability in the workplace: Letting go of what is not working for more feasible ways to working based on the resources available.
+- Ability to prioritize tasks based on objectives and timeline
 
 
 Role Change:
 Agreed roles from the signed roles and responsibilty agreement was consistent all throug the program, however dataset specified for the project was changed at the analysis phase from DHS to IPUMS-DHS.
 
 The reason for this change was limited storage, affecting only the dataset.This however, gave me the opportunity to apply database management skills and develop best practices in file documentation.
-
