@@ -1,10 +1,13 @@
 ---
-title: '     '
+title: "       "
 output:
+  word_document: default
   html_document:
     css: justify.css
-  bibliography: references.bib
+    link-citations: true
+bibliography: references.bib
 ---
+
 
 ```{r, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
 cat('
@@ -28,9 +31,9 @@ cat('
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-packages<- c("rmarkdown","knitr","dplyr","plotly","readxl")
+packages<- c("dplyr","plotly","readxl")
 to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
-if (length(to_install))install.packages(to_install)
+if (length(to_install))install.packages(to_install, repos = "https://cran.rstudio.com")
 lapply(packages,library,character.only=TRUE)
 
 ```
@@ -53,13 +56,17 @@ Evidencing academic skills in the workplace including collection of relevant dat
 
 The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the [The DHS Program](https://dhsprogram.com).
 
-The DHS Program, funded by USAID collects nationally representative global health data, primarily to monitor and evaluate population, health, and nutrition programs, providing data to track approximately 30 SDG indicators[1](https://dhsprogram.com/topics/sdgs/index.cfm) which aligns with the Sustainable Development Goals (SDG)[@dhs2025]
+The DHS Program, funded by USAID collects nationally representative global health data, primarily to monitor and evaluate population, health, and nutrition programs, providing data to track approximately 30 SDG indicators. The DHS program provides these data for tracking as well as measure to track them, contributing significantly towards achieving the SDG 3 and 5[@sdg].
 
-However, the DHS Program has been suspended and currently undergoing review for further funding. During the period of this review, new registerations are not being accepted, hence restricting access to datasets in addition to other far-reaching effect as highlighted by (cite when data goes dark). This professional work-based placement project, with the Biostatistics and Health Data Science group, UoA, aims to gather, synthesize and analyse, datasets from Demographic and Health Surveys(DHS) program that are relevant to global health projects relevant to the team. This is to mitigate the recent suspension of the dhs program, hence limiting access to only existing registered users as new registerations/data requests are not being accepted.
+However, the DHS Program has been suspended and currently undergoing review for further funding. During the period of this review, new registrations are not being accepted, hence restricting access to datasets commonly used by undergraduate and post graduate students for their theses and trainings, especially in LMICs, thereby significantly hampering preparations for future national and global health leadership training in addition to other far-reaching effects.
+
+My professional work-based placement project, with the Biostatistics and Health Data Science group, UoA, focused on collecting, organising, merging and analyzing, datasets from Demographic and Health Surveys(DHS) program that are relevant to global health projects. While this mitigates the recent suspension of the dhs program for students and researchers within the team working on global health projects, it also gave me an opportunity to familiarize with global health data and perform exploratory data analysis on aspects of Gender Inequality including Female Genital Mutilation, Intimate Partner Violence and Autonomy of Health Care Decision Making which are often intertwined and prevalent issues for women of child bearing age in LMICs [@wessells2022].
 
 Access was given to me using my supervisor's login to carry out my data acquisition from DHS Program website, however, Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) as merging of DHS datasets was not feasible due to memory and time constraint. IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS) across countries and over time. The integrated microdata extracted from IPUMS-DHS enables cross-country and trend analyses over time. The data is free to use for research and teaching purposes, however, users must register for an account and agree to the terms of use.
 
 To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
+
+
 
 ### Project Aim
 
@@ -70,23 +77,84 @@ This project achieved two aims
 
 ### Methods
 
-The project was carried out in two phases: Documentation was ensured all through the project wth provides clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
+The project was carried out in two phases: Documentation was ensured all through the project with provides clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
 
 #### Autodownload_Workflow
 
-A structured workflow which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was scripted using R Markdown, enabling seamless data retrieval for collaborative research. This repository is designes to support global health studies by providing structured reproducible scripts that ensure secure data access, automate downloads, and systematically oraganize datasets for pooled cross-country analysis.
+A structured reproducible workflow was scripted using R Markdown which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was , enabling seamless data retrieval for collaborative research in support of global health studies. It ensure secure data access, automates downloads, and systematically unzips, organizes and saves the datasets in hierarchical file structure.`FileName/CountryName/SurveyYear/DataType`. The owrkflow is sppecifically for DHS Datasets in SPSS and STATA formats as specified in my project tasks.
 
-The workflow includes the following key components: - Secure data access: Utilizes DHS login credentials to authenticate and access datasets. - Automated downloads: Scripts to automatically download specified datasets based on user-defined parameters (e.g., country, year, survey type). - Data organization: Systematically organizes downloaded datasets into a structured directory for easy access and management. -
+#### DHS IR File Merge (Pilot merge)
 
-#### IPUMS-DHS File Merge Workflow
+A structured, reproducible SPSS syntax workflow was developed to merge DHS Individual Recode (IR) datasets from multiple countries and survey years, demonstrated by a pilot merge of Kenya and Tanzania 2022 datasets. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual[@dhsmerge2025]. The below code shows the workflow and is set to do not run. How ever the SPSS syntax file is saved in the shared One-Drive folder for the project.
 
-A structured workflow for merging IPUMS-DHS datasets from multiple countries and years was scripted using R Markdown, enabling seamless integration of harmonized data for comprehensive cross-country analysis. This repository is designed to support global health studies by providing structured reproducible scripts that ensure efficient data merging, variable mapping, and dataset management.
+```{r eval=FALSE, include=TRUE}
 
-The workflow includes the following key components: - Data import: Scripts to import IPUMS-DHS datasets based on user-defined parameters (e.g., country, year). - Variable mapping: Aligns variables across different datasets to ensure consistency and comparability. - Data merging: Combines datasets from multiple countries and years into a single comprehensive dataset for analysis. - Documentation: Provides clear instructions and documentation to facilitate use by other researchers.
+*SPSS
+* Encoding: UTF-8.
+*SPSS Version 30.0.0.0(172)
+*  Encoding: UTF-8.
+
+
+*Check Recode file to confirm  variable names context match. For this pilot merging, KEIR8CFL.SAV and TZIR82FL.SAV were conducted in the same year and survey phase (Ist Survey conducted in DHS Phase 8, in 2022).
+
+*KEIR8CFL.SAV however is a continuous DHS Dataset. Create a copy of original dataset as these changes will over-write the original dataset. UNless otherwise specified as in Step 2
+
+*STep1: Create Unique ID using V000 and Case ID variables from both files. to merge from Dataset 1( KEIR8CFL.SAV )
+
+*Unique ID for Kenya; Dataset 1( KEIR8CFL.SAV ).
+
+DATASET ACTIVATE DataSet1.
+STRING  UCASEID (A20).
+COMPUTE UCASEID=CONCAT(V000,CASEID).
+VARIABLE LABELS  UCASEID 'Unique Case ID'.
+EXECUTE.
+
+
+*Unique ID for Tanzania; Dataset 2( TZIR82FL.SAV ).
+
+DATASET ACTIVATE DataSet2.
+STRING  UCASEID (A20).
+COMPUTE UCASEID=CONCAT(V000,CASEID).
+VARIABLE LABELS  UCASEID 'Unique Case ID'.
+EXECUTE.
+
+
+
+*Step 2: Select Unique case ID along with IPV variables from both datasets for merging. Save them with a different name. Modify file path.
+
+DATASET ACTIVATE DataSet1.
+SAVE OUTFILE='C:\Users\Desktop\_KEIR8CFL.SAV'
+  /KEEP UCASEID V000 V001 V003 V004 V005 V006 V007 G100 G101 G102 G103 G104 G105 G107 V005.
+
+DATASET ACTIVATE DataSet2.
+SAVE OUTFILE='C:\Users\Desktop\_TZIR82FL.SAV'
+  /KEEP UCASEID V000 V001 V003 V004 V005 V006 V007 G100 G101 G102 G103 G104 G105 G107 V005.
+
+*Open _KEIR8CFL.SAV and _TZIR82FL.SAV as Datasets 3 and 4 respectively
+
+
+*Step 3: Merge all variables.
+DATASET ACTIVATE DataSet3.
+ADD FILES /FILE=*
+  /FILE='DataSet4'.
+EXECUTE.
+
+*By default, the active dataset (Dataset3 _KEIR8CFL.SAV) is modified to contain the merged cases from the other dataset (Dataset4  _TZIR82FL.SAV).
+
+
+SAVE OUTFILE='C:\Users\Desktop\KE8-TZ8-ir-ipv.SAV'
+  /COMPRESSED.
+
+
+```
+
+
 
 #### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
 
 -   Dataset overview
+
+
 -   IPV
 -   FGM
 -   AHCDM
@@ -105,21 +173,21 @@ Output is saved to One drive folder in the below order
 
 ```         
 DHS-Download Task
-├── [DHS_Downloads]()
-└── [Downloads report, metadata, log]()
+├── [DHS_Downloads]
+└── [Downloads report, metadata, log]
 
-[Gender Inequalities]()
-├── [DHS]()
-│   ├── [dhs-ir-piolt-merge-KE8_TZ8]()
-│   └── [planning and documentation]()
-└── [IPUMS]()
-    ├── [ipums-analysis]()
-    │   ├── [ipums-auto-hc-decision]()
-    │   ├── [ipums-fgm-women]()
-    │   └── [ipums-ipv-physical]()
-    ├── [ipums-data-extracts-comd-files]()
-    ├── [ipums-ir-dataset]()
-    └── [ipums-planning-and-var-map]()
+[Gender Inequalities]
+├── [DHS]
+│   ├── [dhs-ir-piolt-merge-KE8_TZ8]
+│   └── [planning-and-var-map]
+└── [IPUMS]
+    ├── [ipums-analysis]
+    │   ├── [ipums-auto-hc-decision]
+    │   ├── [ipums-fgm-women]
+    │   └── [ipums-ipv-physical]
+    ├── [ipums-data-extracts-comd-files]
+    ├── [ipums-ir-dataset]
+    └── [ipums-planning-and-var-map]
 ```
 
 ### Implications for the Organisation:
@@ -145,7 +213,14 @@ DHS-Download Task
 -   Visualisation: Plotly, ggplot2
 
 
+### Abbreviations
+
+
+
+
 
 ### References
 
-https://dhsprogram.com/topics/sdgs/index.cfm
+
+
+
