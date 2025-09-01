@@ -153,11 +153,113 @@ SAVE OUTFILE='C:\Users\Desktop\KE8-TZ8-ir-ipv.SAV'
 #### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
 
 -   Dataset overview
-
-
 -   IPV
 -   FGM
 -   AHCDM
+
+#### IPV: Survey Responses by Country to Have you Ever been Slapped by an intimate partner (last 12 months)
+
+```{r
+library(plotly)
+library(dplyr)
+library(readxl)
+library(tidyr)
+
+```
+
+```{r}
+# Read data
+
+df <- read_excel("slapped in last 12 months freq no missing values.xlsx", sheet = "slapped in last 12 months freq")
+
+# List the columns you want in the proportion calculation (include 'Missing')
+response_cols <- c(
+  "Not ever slapped",
+  "Often during last 12 months",
+  "Sometimes during last 12 months",
+  "Not at all in last 12 months",
+  "Yes, timing and frequency unknown"
+)
+
+
+# Calculate total (include 'Missing'), then get proportions
+df <- df %>%
+  rowwise() %>%
+  mutate(Total = sum(c_across(all_of(response_cols)))) %>%
+  ungroup()
+
+# Calculate percentages
+for (col in response_cols) {
+  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
+}
+
+
+# Reshape to long format for plotting
+df_long <- df %>%
+  select(Country, ends_with("%")) %>%
+  pivot_longer(
+    cols = -Country,
+    names_to = "Response",
+    values_to = "Percent"
+  ) %>%
+  mutate(Response = gsub(" %", "", Response))  # Clean up response label
+
+```
+
+```{r}
+fig <- plot_ly(
+  df_long,
+  x = ~Country,
+  y = ~Percent,
+  color = ~Response,
+  type = "bar"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "“Slapped in Last 12 Months",
+    xaxis = list(title = "Country", tickangle = -45),   # Rotate x labels if crowded
+    yaxis = list(title = "Percent of Respondents"),
+    legend = list(title = list(text = "Response Category"))
+  )
+
+fig <- plot_ly(
+  df_long,
+  y = ~Country,
+  x = ~Percent,
+  color = ~Response,
+  type = "bar",
+  orientation = "h"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "Slapped in Last 12 Months",
+    yaxis = list(title = "Country", categoryorder = "total ascending"),
+    xaxis = list(title = "Percent of Respondents"),
+    legend = list(title = list(text = "Response Category"))
+  )
+
+
+fig <- plot_ly(
+  df_long,
+  y = ~Country,
+  x = ~Percent,
+  color = ~Response,
+  type = "bar",
+  orientation = "h"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "Slapped in Last 12 Months",
+    yaxis = list(title = "Country", categoryorder = "total ascending"),
+    xaxis = list(title = "Percent of Respondents"),
+    legend = list(title = list(text = "Response Category"))
+  )
+
+fig
+
+```
+
+
 
 ### Outcomes
 
