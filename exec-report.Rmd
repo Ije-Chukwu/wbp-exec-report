@@ -1,15 +1,14 @@
 ---
-title: "       "
+title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
+  SCIENCE SCIENCE'
 output:
   word_document: default
+  always_allow_html: true
   html_document:
     css: justify.css
-    link-citations: true
-bibliography: references.bib
 ---
 
-
-```{r, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
+```{r header, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
 cat('
 <table width="100%">
   <tr>
@@ -36,37 +35,43 @@ to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
 if (length(to_install))install.packages(to_install, repos = "https://cran.rstudio.com")
 lapply(packages,library,character.only=TRUE)
 
+# In your setup chunk
+if (!requireNamespace("webshot2", quietly = TRUE)) {
+  install.packages("webshot2")
+}
+library(webshot2)
+
+save_plotly_screenshot <- function(plotly_obj, file_png, width = 800, height = 600) {
+  html_file <- tempfile(fileext = ".html")
+  htmlwidgets::saveWidget(plotly_obj, file = html_file)
+  webshot2::webshot(html_file, file = file_png, vwidth = width, vheight = height, delay = 0.5)
+}
+
+#Function Usage:
+# save_plotly_screenshot(fig_ipv, "fig_ipv.png")
+
+
 ```
 
-### Data collection, synthesis and Analysis of Gender Inequality in LMICs using DHS and IPUMS-DHS Data
+## Project Topic: DHS Data Management and Analysis of Gender Inequality in Reproductive Women across LMICs using IPUMS-DHS Dataset
 
-```{r, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
+```{r name-date, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
 cat('<hr>
 <div style="text-align: left; font-size: 16px; margin-top: 30px;">
-  <em>Author: Ijeoma<br>
+  <em>Author: Ijeoma Nwachukwu <br>
   Date: 2025-08-26</em>
 </div>')
 ```
 
-## Part A. Main report:
-
-Evidencing academic skills in the workplace including collection of relevant data, synthesis, analysis and interpretation; and clearly communicating data science outputs to relevant stakeholders.
-
 ### Project Background
 
-The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS charcteristed by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the [The DHS Program](https://dhsprogram.com).
+The Biostatistics and Health Data Science Group, is a multi-disciplinary academic research and teaching under the IAHS characteristic by collaborative research, consultancy and training across clinical, biological and global health domains. In the global health domain where I was assigned to, the data used to conduct the research as well as for training purposes are collected from a number of secure sources, including the [The DHS-Program](https://dhsprogram.com).
 
-The DHS Program, funded by USAID collects nationally representative global health data, primarily to monitor and evaluate population, health, and nutrition programs, providing data to track approximately 30 SDG indicators. The DHS program provides these data for tracking as well as measure to track them, contributing significantly towards achieving the SDG 3 and 5[@sdg].
+The DHS-Program, funded by USAID collects nationally representative global health data, to monitor and evaluate population, health, and nutrition programs, providing data to track approximately 30 SDG indicators. They provides these data for tracking as well as measure to track them, contributing significantly towards achieving the SDG 3 and 5 (The DHS Program, 2025).
 
-However, the DHS Program has been suspended and currently undergoing review for further funding. During the period of this review, new registrations are not being accepted, hence restricting access to datasets commonly used by undergraduate and post graduate students for their theses and trainings, especially in LMICs, thereby significantly hampering preparations for future national and global health leadership training in addition to other far-reaching effects.
+However, the DHS-Program has been suspended and currently undergoing review for further funding. During the period of this review, new registrations are not being accepted, hence restricting access to datasets commonly used by undergraduate and post graduate students for their theses and training, especially in LMICs, thereby significantly hampering preparations for future national and global health leadership training in addition to other far-reaching effects.
 
-My professional work-based placement project, with the Biostatistics and Health Data Science group, UoA, focused on collecting, organising, merging and analyzing, datasets from Demographic and Health Surveys(DHS) program that are relevant to global health projects. While this mitigates the recent suspension of the dhs program for students and researchers within the team working on global health projects, it also gave me an opportunity to familiarize with global health data and perform exploratory data analysis on aspects of Gender Inequality including Female Genital Mutilation, Intimate Partner Violence and Autonomy of Health Care Decision Making which are often intertwined and prevalent issues for women of child bearing age in LMICs [@wessells2022].
-
-Access was given to me using my supervisor's login to carry out my data acquisition from DHS Program website, however, Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) as merging of DHS datasets was not feasible due to memory and time constraint. IPUMS-DHS harmonizes data from the Demographic and Health Surveys (DHS) across countries and over time. The integrated microdata extracted from IPUMS-DHS enables cross-country and trend analyses over time. The data is free to use for research and teaching purposes, however, users must register for an account and agree to the terms of use.
-
-To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
-
-
+My project focused on collecting, organizing, merging and analyzing, datasets from DHS-program relevant to our global health projects. While this mitigates the recent suspension of the DHS-program for students and researchers within the team working on global health projects, it also gave me an opportunity to familiarize with global health data and perform exploratory data analysis on aspects of Gender Inequality including Female Genital Mutilation, Intimate Partner Violence and Autonomy of Health Care Decision Making which are often intertwined and are prevalent issues for women of child bearing age in LMICs(Wessells & Kostelny, 2022).
 
 ### Project Aim
 
@@ -77,17 +82,273 @@ This project achieved two aims
 
 ### Methods
 
-The project was carried out in two phases: Documentation was ensured all through the project with provides clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
+I accessed the data from DHS-Program website using my supervisor's login. Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized data from the Demographic and Health Surveys (DHS) across countries and over time. The data is free to use for research and teaching purposes, however, users must register for an account and agree to the terms of use.
 
-#### Autodownload_Workflow
+To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS-Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
 
-A structured reproducible workflow was scripted using R Markdown which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was , enabling seamless data retrieval for collaborative research in support of global health studies. It ensure secure data access, automates downloads, and systematically unzips, organizes and saves the datasets in hierarchical file structure.`FileName/CountryName/SurveyYear/DataType`. The owrkflow is sppecifically for DHS Datasets in SPSS and STATA formats as specified in my project tasks.
+The project was carried out in three phases:
+
+1.  Autodownload of DHS Datasets
+
+2.  DHS IR File Merge (Pilot merge)
+
+3.  Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data:
+
+Documentation was ensured all through the project with clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
+
+#### Auto-download of DHS Datasets
+
+A structured reproducible workflow was scripted using R Markdown which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was , enabling seamless data retrieval for collaborative research in support of global health studies. It ensure secure data access, automates downloads, and systematically unzips, organizes and saves the datasets in hierarchical file structure.`FileName/CountryName/SurveyYear/DataType`. The workflow is sppcifically for DHS Datasets in SPSS and STATA formats as specified in my project tasks.
 
 #### DHS IR File Merge (Pilot merge)
 
-A structured, reproducible SPSS syntax workflow was developed to merge DHS Individual Recode (IR) datasets from multiple countries and survey years, demonstrated by a pilot merge of Kenya and Tanzania 2022 datasets. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual[@dhsmerge2025]. The below code shows the workflow and is set to do not run. How ever the SPSS syntax file is saved in the shared One-Drive folder for the project.
+A structured, reproducible workflow was developed to merge DHS Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania 2022) using SPSS Syntax. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual(The DHS Program, 2025). See syntax of workflow in [Appendix 1](Appendix%201) set to do-not-run.
 
-```{r eval=FALSE, include=TRUE}
+#### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
+
+The data was explored using SPSS Cross-tabulation of the variables and R-Plotly visualization of spss-outputs for the following. 1. IPV: percentage of women slapped in last 12 month (frequency), variable code= (DVPSLAPFQ) 2. FGM: percentage of ever circumcised women within country, variable code= (FCCIRC) 3. AHCDM: percentage of women who have the final say on their health care within country, variable code= (FCCIRC)
+
+#### IPV: Percentage of Women Ever Slapped by an Intimate Partner within the Last 12 Months
+
+This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
+
+```{r lib}
+
+library(plotly)
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(forcats)
+```
+
+```{r ipv-percentage-plot}
+# Read data
+
+df_ipv <- read_excel("percentage of women slapped in last 12 month (frequency).xlsx", sheet = "sheet1")
+
+response_ipv <- c(
+  "Not ever slapped",
+  "Often during last 12 months",
+  "Sometimes during last 12 months",
+  "Not at all in last 12 months",
+  "Yes, timing and frequency unknown"
+)
+
+# Multiply resp_colums by 100
+df_ipv <- df_ipv %>%
+  mutate(across(all_of(response_ipv), ~ . * 100))
+
+# Reshape to long format for plotting
+df_ipv_long <- df_ipv %>%
+  select(country, all_of(response_ipv)) %>%
+  pivot_longer(
+    cols = -country,
+    names_to = "Response",
+    values_to = "Percent"
+  ) %>%
+  mutate(Response = gsub(" %", "", Response))  # Clean up response label
+
+#arrange bars in ascending order
+ipvcountry_order <- df_ipv_long %>%
+  group_by(country) %>%
+  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
+  arrange(total_percent) %>%
+  pull(country)
+
+# Set country factor levels according to ascending total percent
+df_ipv_long <- df_ipv_long %>%
+  mutate(country = factor(country, levels = ipvcountry_order))
+
+#Generate interactive plot using plotly
+
+fig1_ipv <- plot_ly(
+  df_ipv_long,
+  y = ~country,
+  x = ~Percent,
+  color = ~Response,
+  type = "bar",
+  orientation = "h"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "Percentage of Women Ever Slapped by an Intimate Partner within the Last 12 Months",
+    xaxis = list(title = " "), 
+    yaxis = list(title = " "), 
+    legend = list(title = list(text = "Response Category"))
+  )
+
+fig1_ipv
+save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
+knitr::include_graphics("ipv.png")
+
+```
+
+#### FGM: Percentage of Women Ever Circumsized within Country
+
+This plot shows the percentage response of women's who have experienced female genital mutilation/cutting (FGM/C) within country, with responses categorized as "yes," "no," and "don't know." There is wide country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts, indicating good awareness or clear reporting. The significant country-to-country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
+
+```{r fgm-percentage-plot}
+# Read data
+
+df_fgm <- read_excel("percentage of ever circumcised women within country.xlsx", sheet = "sheet1")
+
+response_cols <- c(
+  "no",
+  "yes",
+  "don't know"
+)
+
+# Reshape to long format for plotting
+df_fgm_long <- df_fgm %>%
+  select(country, all_of(response_cols)) %>%
+  pivot_longer(
+    cols = -country,
+    names_to = "Response",
+    values_to = "Percent"
+  ) %>%
+  mutate(Response = gsub(" %", "", Response))  # Clean up response label
+
+#arrange bars in ascending order
+fgmcountry_order <- df_fgm_long %>%
+  group_by(country) %>%
+  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
+  arrange(total_percent) %>%
+  pull(country)
+
+# Set country factor levels according to ascending total percent
+df_fgm_long <- df_fgm_long %>%
+  mutate(country = factor(country, levels = fgmcountry_order))
+
+#Generate interactive plot using Plotly
+
+fig2_fgm <- plot_ly(
+  df_fgm_long,
+  y = ~country,
+  x = ~Percent,
+  color = ~Response,
+  type = "bar",
+  orientation = "h"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "Percentage of Women Ever Circumsised",
+    xaxis = list(title = " "), 
+    yaxis = list(title = " "),
+    legend = list(title = list(text = "Response Category"))
+  )
+
+fig2_fgm
+save_plotly_screenshot(fig2_fgm, "fig2_fgm.png")
+knitr::include_graphics("fgm.png")
+
+```
+
+#### AHCDM: Percentage of Women who have the final say in their healthcare within country
+
+The chart explores women’s reported autonomy and roles in health care decision-making. The response categories include “Woman alone,” “Woman and husband/partner,” “Woman and someone else,” “Husband/partner,” “Someone else,” and “Family elders/relatives.” In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions. Country patterns reflect diverse sociocultural structures and levels of empowerment.
+
+```{r ahcdm-percentage-plot}
+# Read data
+
+dfahcdm <- read_excel("percentage of women who have the final say on their health care within country.xlsx", sheet = "sheet1")
+
+response_ahcdm <- c(
+  "Woman alone",
+  "Woman and husband/partner",
+  "Woman and someone else",
+  "Husband/partner",
+  "Family elders/relatives"
+)
+
+# Reshape to long format for plotting
+ahcdm_long <- dfahcdm %>%
+  select(country, all_of(response_ahcdm)) %>%
+  pivot_longer(
+    cols = -country,
+    names_to = "Response",
+    values_to = "Percent"
+  ) %>%
+  mutate(Response = gsub(" %", "", Response))  # Clean up response label
+
+
+#arrange bars in ascending order
+ahcdmcountry_order <- ahcdm_long %>%
+  group_by(country) %>%
+  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
+  arrange(total_percent) %>%
+  pull(country)
+
+# Set country factor levels according to ascending total percent
+ahdcm_long <- ahcdm_long %>%
+  mutate(country = factor(country, levels = ahcdmcountry_order))
+
+#Generate interactive plot using Plotly
+
+fig3_ahcdm <- plot_ly(
+  ahcdm_long,
+  y = ~country,
+  x = ~Percent,
+  color = ~Response,
+  type = "bar",
+  orientation = "h"
+) %>%
+  layout(
+    barmode = "stack",
+    title = "percentage of women who have the final say on their health care within country",
+    xaxis = list(title = " "), 
+    yaxis = list(title = " "),
+    legend = list(title = list(text = "Response Category"))
+  )
+
+fig3_ahcdm
+save_plotly_screenshot(fig3_ahcdm, "fig3_ahcdm.png")
+knitr::include_graphics("ahcdm.png")
+```
+
+Data and Output files are saved to One drive folder in the below order
+
+```         
+DHS-Download Task
+├── [DHS_Downloads]
+└── [Downloads report, metadata, log]
+
+[Gender Inequalities]
+├── [DHS]
+│   ├── [dhs-ir-piolt-merge-KE8_TZ8]
+│   └── [planning-and-var-map]
+└── [IPUMS]
+    ├── [ipums-analysis]
+    │   ├── [spss-analysis]
+    │   └── [r-project-files-exec-report]
+    ├── [ipums-data-extracts-comd-files]
+    ├── [ipums-ir-dataset]
+    └── [ipums-planning-and-var-map]
+    └── [ipums-planning-and-var-map]
+    
+```
+
+### Implications for the Organisation:
+
+-   The Autodownload workflow can be used by the team to access and download datasets from DHS-Program website for future research projects
+-   The IPUMS-DHS file merge workflow can be used by the team to merge IR datasets from IPUMS-DHS website for future research projects.
+-   The EDA scripts can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets for future research projects.
+-   The documentation and reproducible workflows can be used by the team to understand the process of accessing, downloading, merging and analysing datasets from DHS-Program and IPUMS-DHS website for future research projects.
+-   The variable mappings can be used by the team to understand the variables in DHS and IPUMS-DHS datasets.
+-   The SPSS syntax files can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets using SPSS as well as verify results without having to perform the analysis from scratch.
+
+
+
+### References
+
+The DHS Program. (2025).*Sustainable Development Goals.* <https://dhsprogram.com/topics/sdgs/index.cfm> (Accessed August 28, 2025)
+
+The DHS Program. (2025). *Merging datasets.* <https://dhsprogram.com/data/Merging-datasets.cfm> (Accessed September 1, 2025)
+
+Wessells, M. G., & Kostelny, K. (2022). The psychosocial impacts of intimate partner violence against women in LMIC contexts: Toward a holistic approach. *International Journal of Environmental Research and Public Health, 19(21), 14488.* <https://doi.org/10.3390/ijerph192114488>\*
+
+### Appendix 1
+
+```{r spss-syntax-pilot-merge, eval=FALSE, include=TRUE}
 
 *SPSS
 * Encoding: UTF-8.
@@ -148,181 +409,72 @@ SAVE OUTFILE='C:\Users\Desktop\KE8-TZ8-ir-ipv.SAV'
 
 ```
 
+### Appendix 2
+
+```{r spss-syntax-crosstab, eval=FALSE, include=TRUE}
+* Encoding: UTF-8
+*Version 29.0.2.0 (20)
+Naming conventions for CROSS TABULATIONS results for further analysis
+1. ipv: percentage of women slapped in last 12 month (frequency), variable code= (DVPSLAPFQ)
+2. fgm: percentage of ever circumcised women within country, variable code= (FCCIRC)
+3. ahcdm: percentage of women who have the final say on their health care within country, variable code= (FCCIRC)
 
 
-#### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
+*Load datset.
+ GET
+  FILE='C:\Users\Desktop\ipums-ir-dataset.sav'.
 
--   Dataset overview
--   IPV
--   FGM
--   AHCDM
 
-#### IPV: Survey Responses by Country to Have you Ever been Slapped by an intimate partner (last 12 months)
 
-```{r
-library(plotly)
-library(dplyr)
-library(readxl)
-library(tidyr)
+DATASET ACTIVATE DataSet1.
+
+CROSSTABS
+  /TABLES=COUNTRY BY DVPSLAPFQ
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT ROW COLUMN 
+  /COUNT ROUND CELL.
+
+
+CROSSTABS
+  /TABLES= COUNTRY BY FCCIRC
+  /FORMAT=AVALUE TABLES
+  /CELLS=COLUMN 
+  /COUNT ROUND CELL.
+
+
+CROSSTABS
+  /TABLES=COUNTRY BY DECFEMHCARE
+  /FORMAT=AVALUE TABLES
+  /CELLS=COUNT ROW COLUMN 
+  /COUNT ROUND CELL..
+
+
+
+*-----------------------------------------------------------------------.
+
+
+*For data cleaning in excel
+ 1. remove:
+     First 3 row headings
+ 2. Name col1: country
+ 3. Populate country column
+ 4. Filter and remove:
+    - All row/col Totals
+    - cols:
+            Not in Universe col
+            Missing 
+    -rows: in count/% col
+             Blank
+             All rows except % within country (for fgm and ahcdm)
+ 5.Number format is Percentage
+ 
+ 
+
 
 ```
 
-```{r}
-# Read data
+### Appendix 3
 
-df <- read_excel("slapped in last 12 months freq no missing values.xlsx", sheet = "slapped in last 12 months freq")
+### Appendix 4
 
-# List the columns you want in the proportion calculation (include 'Missing')
-response_cols <- c(
-  "Not ever slapped",
-  "Often during last 12 months",
-  "Sometimes during last 12 months",
-  "Not at all in last 12 months",
-  "Yes, timing and frequency unknown"
-)
-
-
-# Calculate total (include 'Missing'), then get proportions
-df <- df %>%
-  rowwise() %>%
-  mutate(Total = sum(c_across(all_of(response_cols)))) %>%
-  ungroup()
-
-# Calculate percentages
-for (col in response_cols) {
-  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
-}
-
-
-# Reshape to long format for plotting
-df_long <- df %>%
-  select(Country, ends_with("%")) %>%
-  pivot_longer(
-    cols = -Country,
-    names_to = "Response",
-    values_to = "Percent"
-  ) %>%
-  mutate(Response = gsub(" %", "", Response))  # Clean up response label
-
-```
-
-```{r}
-fig <- plot_ly(
-  df_long,
-  x = ~Country,
-  y = ~Percent,
-  color = ~Response,
-  type = "bar"
-) %>%
-  layout(
-    barmode = "stack",
-    title = "“Slapped in Last 12 Months",
-    xaxis = list(title = "Country", tickangle = -45),   # Rotate x labels if crowded
-    yaxis = list(title = "Percent of Respondents"),
-    legend = list(title = list(text = "Response Category"))
-  )
-
-fig <- plot_ly(
-  df_long,
-  y = ~Country,
-  x = ~Percent,
-  color = ~Response,
-  type = "bar",
-  orientation = "h"
-) %>%
-  layout(
-    barmode = "stack",
-    title = "Slapped in Last 12 Months",
-    yaxis = list(title = "Country", categoryorder = "total ascending"),
-    xaxis = list(title = "Percent of Respondents"),
-    legend = list(title = list(text = "Response Category"))
-  )
-
-
-fig <- plot_ly(
-  df_long,
-  y = ~Country,
-  x = ~Percent,
-  color = ~Response,
-  type = "bar",
-  orientation = "h"
-) %>%
-  layout(
-    barmode = "stack",
-    title = "Slapped in Last 12 Months",
-    yaxis = list(title = "Country", categoryorder = "total ascending"),
-    xaxis = list(title = "Percent of Respondents"),
-    legend = list(title = list(text = "Response Category"))
-  )
-
-fig
-
-```
-
-
-
-### Outcomes
-
--   Autodownload scripts for DHS Datasets
--   Variable mappings (DHS and IPUMS-DHS)
--   EDA Rmarkdown scripts
--   SPSS EDA Syntax files
--   SPSS EDA Outputs
--   SPSS Syntax file for pilot file merge (Kenya-Tanzania DHS IR Files 2021)
--   Documentation and reproducible workflows for IPUMS-DHS file merge
-
-Output is saved to One drive folder in the below order
-
-```         
-DHS-Download Task
-├── [DHS_Downloads]
-└── [Downloads report, metadata, log]
-
-[Gender Inequalities]
-├── [DHS]
-│   ├── [dhs-ir-piolt-merge-KE8_TZ8]
-│   └── [planning-and-var-map]
-└── [IPUMS]
-    ├── [ipums-analysis]
-    │   ├── [ipums-auto-hc-decision]
-    │   ├── [ipums-fgm-women]
-    │   └── [ipums-ipv-physical]
-    ├── [ipums-data-extracts-comd-files]
-    ├── [ipums-ir-dataset]
-    └── [ipums-planning-and-var-map]
-```
-
-### Implications for the Organisation:
-
--   The Autodownload workflow can be used by the team to access and download datasets from DHS program website for future research projects
--   The IPUMS-DHS file merge workflow can be used by the team to merge IR datasets from IPUMS-DHS website for future research projects.
--   The EDA scripts can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets for future research projects.
--   The documentation and reproducible workflows can be used by the team to understand the process of accessing, downloading, merging and analysing datasets from DHS program and IPUMS-DHS website for future research projects.
--   The variable mappings can be used by the team to understand the variables in DHS and IPUMS-DHS datasets.
--   The SPSS syntax files can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets using SPSS as well as verify results without having to perform the analysis from scratch.
-
-### Academic skills in the workplace to highlight.
-
--   collection of relevant data: DHS, IPUM-DHS data access and download - synthesis: data wrangling, variable mapping, dataset merging
--   analysis and interpretation; EDA, visualisation, reporting
--   Reproducibility: Use of Rmarkdown with adequate documentation, version control and renv. setting ensured, SPSS syntax documented for every step of the analysis carried out on spss. -data security and ethical considerations: Data accessed with secure login details, data stored on secure UoA servers, no data shared with third parties. -data quality checks: Missing data, outliers, duplicates, inconsistencies
-
-### Communication Channels/Methods
-
--   Output templates: Rmarkdown file, SPSS syntax,excel/text file documentations
--   Communication Channel: Email, Power-point Presentation
--   Reporting: Executive report, EDA reports
--   Visualisation: Plotly, ggplot2
-
-
-### Abbreviations
-
-
-
-
-
-### References
-
-
-
-
+#### 
