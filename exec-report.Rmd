@@ -82,35 +82,23 @@ This project achieved two aims
 
 ### Methods
 
-I accessed the data from DHS-Program website using my supervisor's login. Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized data from the Demographic and Health Surveys (DHS) across countries and over time. The data is free to use for research and teaching purposes, however, users must register for an account and agree to the terms of use.
+I accessed the data from DHS-Program website using my supervisor's login. Exploratory data analysis was done using harmonized datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized data from the Demographic and Health Surveys (DHS) across countries and over time. Crosstabulations was done using SPSS and results imported into R to create visual plots.
 
 To access datasets, new users must [register for an account](https://dhsprogram.com/data/new-user-registration.cfm) on the [The DHS-Program](https://dhsprogram.com) website and [apply for datasets](https://www.idhsdata.org/idhs/apply) on the [IPUMS-DHS](https://www.idhsdata.org/idhs/) website.
 
-The project was carried out in three phases:
+The project was carried out in three phases and documentation was ensured for transparency and reproducibility of the workflow and analysis results.
 
-1.  Autodownload of DHS Datasets
+#### Phase 1: Auto-download of DHS Datasets
 
-2.  DHS IR File Merge (Pilot merge)
+A structured reproducible workflow was scripted using R Markdown which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads, enabling seamless data retrieval for collaborative research in support of global health studies. It ensure secure data access, automates downloads, and systematically unzips, organizes and saves the datasets in hierarchical file structure.`FileName/CountryName/SurveyYear/DataType`. The workflow is specifically for DHS Datasets in SPSS and STATA formats as specified in my project tasks.
 
-3.  Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data:
+#### Phase 2: DHS IR File Merge (Pilot merge)
 
-Documentation was ensured all through the project with clear instructions and explanation of codes to ensure transparency and reproducibility of the workflow results and analysis results.
+A structured, reproducible workflow was developed to merge DHS Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania 2022) using SPSS Syntax. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual (The DHS Program, 2025). See syntax of workflow in [Appendix 1](Appendix%201).
 
-#### Auto-download of DHS Datasets
+#### Phase 3: Exploratory Data Analysis and Results using IPUMS-DHS Data
 
-A structured reproducible workflow was scripted using R Markdown which serves as a comprehensive toolkit for accessing, processing, and locally managing DHS downloads was , enabling seamless data retrieval for collaborative research in support of global health studies. It ensure secure data access, automates downloads, and systematically unzips, organizes and saves the datasets in hierarchical file structure.`FileName/CountryName/SurveyYear/DataType`. The workflow is sppcifically for DHS Datasets in SPSS and STATA formats as specified in my project tasks.
-
-#### DHS IR File Merge (Pilot merge)
-
-A structured, reproducible workflow was developed to merge DHS Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania 2022) using SPSS Syntax. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual(The DHS Program, 2025). See syntax of workflow in [Appendix 1](Appendix%201) set to do-not-run.
-
-#### Exploratory Data Analysis of Gender Inequalities using IPUMS-DHS Data
-
-The data was explored using SPSS Cross-tabulation of the variables and R-Plotly visualization of spss-outputs for the following. 1. IPV: percentage of women slapped in last 12 month (frequency), variable code= (DVPSLAPFQ) 2. FGM: percentage of ever circumcised women within country, variable code= (FCCIRC) 3. AHCDM: percentage of women who have the final say on their health care within country, variable code= (FCCIRC)
-
-#### IPV: Percentage of Women Ever Slapped by an Intimate Partner within the Last 12 Months
-
-This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
+##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
 ```{r lib}
 
@@ -177,15 +165,14 @@ fig1_ipv <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-fig1_ipv
 save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
 knitr::include_graphics("ipv.png")
 
 ```
 
-#### FGM: Percentage of Women Ever Circumsized within Country
+This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
 
-This plot shows the percentage response of women's who have experienced female genital mutilation/cutting (FGM/C) within country, with responses categorized as "yes," "no," and "don't know." There is wide country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts, indicating good awareness or clear reporting. The significant country-to-country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
+##### II. FGM: percentage of ever circumcised women within country, variable code= (FCCIRC)
 
 ```{r fgm-percentage-plot}
 # Read data
@@ -237,21 +224,22 @@ fig2_fgm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-fig2_fgm
+
 save_plotly_screenshot(fig2_fgm, "fig2_fgm.png")
 knitr::include_graphics("fgm.png")
 
 ```
 
-#### AHCDM: Percentage of Women who have the final say in their healthcare within country
+This plot presents the percentage response of women who have experienced female genital mutilation/cutting (FGM/C) within country, with responses categorized as "yes," "no," and "don't know." There is wide country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts. The significant country-to-country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
 
-The chart explores women’s reported autonomy and roles in health care decision-making. The response categories include “Woman alone,” “Woman and husband/partner,” “Woman and someone else,” “Husband/partner,” “Someone else,” and “Family elders/relatives.” In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions. Country patterns reflect diverse sociocultural structures and levels of empowerment.
+##### III. AHCDM: percentage of women who have the final say on their health care within country, variable code= DECFEMHCARE
 
-```{r ahcdm-percentage-plot}
+```{r ahcdm-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
 # Read data
 
 dfahcdm <- read_excel("percentage of women who have the final say on their health care within country.xlsx", sheet = "sheet1")
 
+#Define response categories
 response_ahcdm <- c(
   "Woman alone",
   "Woman and husband/partner",
@@ -289,8 +277,7 @@ fig3_ahcdm <- plot_ly(
   y = ~country,
   x = ~Percent,
   color = ~Response,
-  type = "bar",
-  orientation = "h"
+  type = "bar"
 ) %>%
   layout(
     barmode = "stack",
@@ -300,12 +287,15 @@ fig3_ahcdm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-fig3_ahcdm
 save_plotly_screenshot(fig3_ahcdm, "fig3_ahcdm.png")
 knitr::include_graphics("ahcdm.png")
 ```
 
-Data and Output files are saved to One drive folder in the below order
+The chart shows women’s reported autonomy and roles in health care decision-making by `country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
+
+### Output
+
+Output files including dataset, analysis and results are saved to One drive folder in the below order
 
 ```         
 DHS-Download Task
@@ -318,25 +308,23 @@ DHS-Download Task
 │   └── [planning-and-var-map]
 └── [IPUMS]
     ├── [ipums-analysis]
-    │   ├── [spss-analysis]
-    │   └── [r-project-files-exec-report]
+    │   ├── [r-project-files-exec-report]
+    │   └── [spss-analysis]
     ├── [ipums-data-extracts-comd-files]
     ├── [ipums-ir-dataset]
     └── [ipums-planning-and-var-map]
-    └── [ipums-planning-and-var-map]
+
     
 ```
 
 ### Implications for the Organisation:
 
--   The Autodownload workflow can be used by the team to access and download datasets from DHS-Program website for future research projects
+-   The Auto-download workflow can be used by the team to access and download datasets from DHS-Program website for future research projects
 -   The IPUMS-DHS file merge workflow can be used by the team to merge IR datasets from IPUMS-DHS website for future research projects.
 -   The EDA scripts can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets for future research projects.
 -   The documentation and reproducible workflows can be used by the team to understand the process of accessing, downloading, merging and analysing datasets from DHS-Program and IPUMS-DHS website for future research projects.
 -   The variable mappings can be used by the team to understand the variables in DHS and IPUMS-DHS datasets.
 -   The SPSS syntax files can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets using SPSS as well as verify results without having to perform the analysis from scratch.
-
-
 
 ### References
 
@@ -472,9 +460,3 @@ CROSSTABS
 
 
 ```
-
-### Appendix 3
-
-### Appendix 4
-
-#### 
