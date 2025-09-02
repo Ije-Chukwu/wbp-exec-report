@@ -139,18 +139,21 @@ library(dplyr)
 sheet_names <- c("ipv", "fgm", "ahcdm")
 
 # Define cleaning function
-clean_spss_output <- function(df) {
-  df %>%
-    # Remove first 3 rows and last row
-    slice(-(1:3), -n()) %>%
-    # Remove first column and last column
-    select(-1, -ncol(.)) %>%
-    # Rename second column to 'country'
-    rename(country = 1) %>%
-    # Remove columns named 'Missing' and 'Not in Universe col' (if present)
-    select(-any_of(c("Missing", "Not in Universe col", "NIU (not in universe)")))
-}
+clean_spss_output <- function(df_raw) {
+# Set row 3 as header
+  new_header <- as.character(unlist(df_raw[3, ]))
+  colnames(df) <- new_header  # Assign new column names
 
+  df %>%
+    # Remove rows 1-2 and last row in cleaned table
+    slice(-(1:2), -n()) %>%
+    # Remove columns 1 and last column
+    select(-1, -ncol(.)) %>%
+    # Rename column 2 to 'country'
+    rename(country = 2) %>%
+    # Remove columns named 'Missing' and 'Not in Universe col' if present
+    select(-any_of(c("Missing", "Not in Universe col")))
+}
 # Read and clean each sheet
 cleaned_data <- lapply(sheet_names, function(sheet) {
   df_raw <- read_excel("ipv-fgm-ahcdm-spss-output.xlsx", sheet = sheet)
