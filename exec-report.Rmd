@@ -2,9 +2,9 @@
 title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
   SCIENCE SCIENCE'
 output:
+  word_document: default
   html_document:
     css: justify.css
-  word_document: default
   always_allow_html: true
 ---
 
@@ -96,7 +96,7 @@ A structured, reproducible workflow was developed to merge DHS Individual Recode
 
 #### Phase 3: Exploratory Data Analysis and Results using IPUMS-DHS Data
 
-Exploratory data analysis was done using datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized DHS survey datasets across countries and over time. Initial Cross-tabulations was done for key variables using SPSS, SPSS output tables were cleaned excel with steps documented (see [Appendix 2](Appendix 2) ) and results imported into R to create visual interactive plots.
+Exploratory data analysis was done using datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized DHS survey datasets across countries and over time. Initial Cross-tabulations was done for key variables using SPSS, SPSS output tables were cleaned excel with steps documented (see [Appendix 2](Appendix%202) ) and results imported into R to create visual interactive plots.
 
 ```{r lib, include=FALSE}
 
@@ -157,7 +157,6 @@ ahcdm_clean <- cleaned_data$ahcdm
 
 ```
 
-
 ```{r rename-cols-del-missing-niu-total, include=FALSE}
 #Rename categories columns and delete Missing, NIU and Total Values
 
@@ -209,10 +208,8 @@ df_ahcdm <- df_ahcdm %>%
 
 ```
 
-
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
-# Read data
 ```{r ipv-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
 library(plotly)
 library(forcats)
@@ -270,17 +267,17 @@ fig_ipv
 #save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
 
 ```
-```{r ipv-plot-img}
+
+```{r ipv-plot-img, echo=TRUE}
 knitr::include_graphics("fig1_ipv.png")
 knitr::include_graphics("fig2_ipv.png")
 ```
-
 
 This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
 
 ##### II. FGM: percentage of ever circumcised women within Country, variable code= (FCCIRC)
 
-```{r fgm-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
+```{r fgm-percentage-plot, message=FALSE, warning=FALSE, include=FALSE}
 # Read data
 
 df_fgm <- df_fgm
@@ -336,7 +333,7 @@ fig_fgm <- plot_ly(
 
 ```
 
-```{r fgm-plot-img}
+```{r fgm-plot-img,echo=TRUE}
 knitr::include_graphics("fig3_fgm.png")
 ```
 
@@ -400,15 +397,14 @@ fig3_ahcdm <- plot_ly(
 
 ```
 
-
-```{r ahcdm-plot-img}
+```{r ahcdm-plot-img, echo=TRUE, warning=FALSE}
 knitr::include_graphics("fig4_ahcdm.png")
 knitr::include_graphics("fig5_ahcdm.png")
 ```
 
 The chart shows women’s reported autonomy and roles in health care decision-making by `Country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
 
-### Output
+#### Output
 
 Output files including dataset, analysis and results are saved to One drive folder in the below order
 
@@ -434,12 +430,9 @@ DHS-Download Task
 
 ### Implications for the Organisation:
 
--   The Auto-download workflow can be used by the team to access and download datasets from DHS-Program website for future research projects
--   The IPUMS-DHS file merge workflow can be used by the team to merge IR datasets from IPUMS-DHS website for future research projects.
--   The EDA scripts can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets for future research projects.
--   The documentation and reproducible workflows can be used by the team to understand the process of accessing, downloading, merging and analysing datasets from DHS-Program and IPUMS-DHS website for future research projects.
--   The variable mappings can be used by the team to understand the variables in DHS and IPUMS-DHS datasets.
--   The SPSS syntax files can be used by the team to carry out exploratory data analysis on IPUMS-DHS datasets using SPSS as well as verify results without having to perform the analysis from scratch.
+-   Easy access to DHS Global Datasets.
+-   Data Preservation pending the resumption of the DHS program and mitigation against possible future program suspension.
+-   Continuity of trainings, including future and ongoing training and projects by students and researchers working on global health projects.
 
 ### References
 
@@ -577,10 +570,5 @@ CROSSTABS
 ```
 
 ### Appendix 3
-_Abbreviations_
-- DHS
-- IPUMS
-- USAID
-- LMICs
-- All IPUMS Variable abbreviations available on [IPUMS-DHS](https://www.idhsdata.org/idhs-action/variables/group).
 
+*Abbreviations* - DHS - IPUMS - USAID - LMICs - All IPUMS Variable abbreviations available on [IPUMS-DHS](https://www.idhsdata.org/idhs-action/variables/group).
