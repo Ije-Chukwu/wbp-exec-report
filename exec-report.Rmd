@@ -78,7 +78,7 @@ My project focused on collecting, organizing, merging and analyzing, datasets fr
 This project achieved two aims
 
 1.  Created a global health data repository of DHS Datasets for 38 years (1984-2022)
-2.  Pooled Cross country Exploratory Data Analysis of Gender Inequalities in women of child bearing age.
+2.  Pooled Cross Country Exploratory Data Analysis of Gender Inequalities in women of child bearing age.
 
 ### Methods
 
@@ -92,7 +92,7 @@ A structured reproducible workflow was scripted using R Markdown which serves as
 
 #### Phase 2: DHS IR File Merge (Pilot merge)
 
-A structured, reproducible workflow was developed to merge DHS Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania 2022) using SPSS Syntax. A cross-country unique identifiers `UCASEID` was created by concatenating country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual (The DHS Program, 2025). See syntax of workflow in [Appendix 1](Appendix%201).
+A structured, reproducible workflow was developed to merge DHS Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania 2022) using SPSS Syntax. A cross-Country unique identifiers `UCASEID` was created by concatenating Country-cluster and case IDs. Subsets containing the `UCASEID` and relevant IPV variables were saved and merged using SPSS commands. This workflow can be adapted for additional countries and survey rounds, and replicated for different variables, provided that the variable names, labels, and meanings are first confirmed to be consistent according to the DHS Recode Manual (The DHS Program, 2025). See syntax of workflow in [Appendix 1](Appendix%201).
 
 #### Phase 3: Exploratory Data Analysis and Results using IPUMS-DHS Data
 
@@ -152,8 +152,8 @@ clean_spss_output <- function(df) {
     slice(-(1:3), -n()) %>%
     # Remove first column and last column
     select(-1, -ncol(.)) %>%
-    # Rename second column to 'country'
-    rename(country = 1) %>%
+    # Rename second column to 'Country'
+    rename(Country = 1) %>%
     # Convert columns 2 to end to numeric
     mutate(across(2:ncol(.), as.numeric))
 }
@@ -180,7 +180,7 @@ df_ipv <- ipv_clean %>%
   select(
     1:ncol(.)
   ) %>%
-  rename(country=1,
+  rename(Country=1,
     `Not ever slapped` = 2,
     `Often during last 12 months` = 3,
     `Sometimes during last 12 months` = 4,
@@ -196,7 +196,7 @@ df_fgm <- fgm_clean %>%
   select(
     1:ncol(.)
   ) %>%
-  rename(country=1,
+  rename(Country=1,
   `no`=2,
   `yes`=3,
   `don't know`=4,
@@ -209,7 +209,7 @@ df_ahcdm <- ahcdm_clean %>%
   select(
     1:ncol(.)
   ) %>%
-  rename(country=1,
+  rename(Country=1,
 `Woman alone`=2,
   `Woman and husband/partner`=3,
   `Woman and someone else`=4,
@@ -228,6 +228,11 @@ df_ahcdm <- df_ahcdm %>%
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
 ```{r ipv-percentage-plot}
+library(plotly)
+library(dplyr)
+library(readxl)
+library(tidyr)
+library(forcats)
 
 response_ipv <- c(
   "Not ever slapped",
@@ -237,36 +242,33 @@ response_ipv <- c(
   "Yes, timing and frequency unknown"
 )
 
-# Multiply resp_colums by 100
-df_ipv <- df_ipv %>%
-  mutate(across(all_of(response_ipv), ~ . * 100))
+# Calculate total (include 'Missing'), then get proportions
+df <- df_ipv %>%
+  rowwise() %>%
+  mutate(Total = sum(c_across(all_of(response_ipv)))) %>%
+  ungroup()
+
+# Calculate percentages
+for (col in response_ipv) {
+  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
+}
+
 
 # Reshape to long format for plotting
-df_ipv_long <- df_ipv %>%
-  select(country, all_of(response_ipv)) %>%
+df_ipv_long <- df %>%
+  select(Country, ends_with("%")) %>%
   pivot_longer(
-    cols = -country,
+    cols = -Country,
     names_to = "Response",
     values_to = "Percent"
   ) %>%
   mutate(Response = gsub(" %", "", Response))  # Clean up response label
 
-#arrange bars in ascending order
-ipvcountry_order <- df_ipv_long %>%
-  group_by(country) %>%
-  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
-  arrange(total_percent) %>%
-  pull(country)
-
-# Set country factor levels according to ascending total percent
-df_ipv_long <- df_ipv_long %>%
-  mutate(country = factor(country, levels = ipvcountry_order))
-
 #Generate interactive plot using plotly
 
 fig1_ipv <- plot_ly(
   df_ipv_long,
-  y = ~country,
+  y = ~Country,
   x = ~Percent,
   color = ~Response,
   type = "bar",
@@ -275,45 +277,49 @@ fig1_ipv <- plot_ly(
   layout(
     barmode = "stack",
     title = "Percentage of Women Ever Slapped by an Intimate Partner within the Last 12 Months",
-    xaxis = list(title = " "), 
-    yaxis = list(title = " "), 
+    yaxis = list(title = "Country"),
+    xaxis = list(
+      title = "within Country %",
+      categoryorder = "total ascending"
+    ),
     legend = list(title = list(text = "Response Category"))
   )
 
-save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
+fig1_ipv
+
 knitr::include_graphics("ipv.png")
 
 ```
 
 This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
 
-##### II. FGM: percentage of ever circumcised women within country, variable code= (FCCIRC)
+##### II. FGM: percentage of ever circumcised women within Country, variable code= (FCCIRC)
 
 ```{r fgm-percentage-plot}
 # Read data
 
 df_fgm <- df_fgm
 
-response_cols <- c(
+fgm_response_cols <- c(
   "no",
   "yes",
   "don't know"
 )
 
 # Calculate total (include 'Missing'), then get proportions
-df <- df %>%
+df_fgm <- df_fgm %>%
   rowwise() %>%
   mutate(Total = sum(c_across(all_of(response_cols)))) %>%
   ungroup()
 
 # Calculate percentages
-for (col in response_cols) {
+for (col in fgm_response_cols) {
   df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
 }
 
 
 # Reshape to long format for plotting
-df_long <- df %>%
+df_long <- df_fgm %>%
   select(Country, ends_with("%")) %>%
   pivot_longer(
     cols = -Country,
@@ -326,7 +332,7 @@ df_long <- df %>%
 
 fig2_fgm <- plot_ly(
   df_fgm_long,
-  y = ~country,
+  y = ~Country,
   x = ~Percent,
   color = ~Response,
   type = "bar",
@@ -346,9 +352,9 @@ knitr::include_graphics("fgm.png")
 
 ```
 
-This plot presents the percentage response of women who have experienced female genital mutilation/cutting (FGM/C) within country, with responses categorized as "yes," "no," and "don't know." There is wide country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts. The significant country-to-country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
+This plot presents the percentage response of women who have experienced female genital mutilation/cutting (FGM/C) within Country, with responses categorized as "yes," "no," and "don't know." There is wide Country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts. The significant Country-to-Country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
 
-##### III. AHCDM: percentage of women who have the final say on their health care within country, variable code= DECFEMHCARE
+##### III. AHCDM: percentage of women who have the final say on their health care within Country, variable code= DECFEMHCARE
 
 ```{r ahcdm-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
 # Read data
@@ -366,9 +372,9 @@ response_ahcdm <- c(
 
 # Reshape to long format for plotting
 ahcdm_long <- df_ahcdm %>%
-  select(country, all_of(response_ahcdm)) %>%
+  select(Country, all_of(response_ahcdm)) %>%
   pivot_longer(
-    cols = -country,
+    cols = -Country,
     names_to = "Response",
     values_to = "Percent"
   ) %>%
@@ -376,28 +382,28 @@ ahcdm_long <- df_ahcdm %>%
 
 
 #arrange bars in ascending order
-ahcdmcountry_order <- ahcdm_long %>%
-  group_by(country) %>%
+ahcdmCountry_order <- ahcdm_long %>%
+  group_by(Country) %>%
   summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
   arrange(total_percent) %>%
-  pull(country)
+  pull(Country)
 
-# Set country factor levels according to ascending total percent
+# Set Country factor levels according to ascending total percent
 ahdcm_long <- ahcdm_long %>%
-  mutate(country = factor(country, levels = ahcdmcountry_order))
+  mutate(Country = factor(Country, levels = ahcdmCountry_order))
 
 #Generate interactive plot using Plotly
 
 fig3_ahcdm <- plot_ly(
   ahcdm_long,
-  y = ~country,
+  y = ~Country,
   x = ~Percent,
   color = ~Response,
   type = "bar"
 ) %>%
   layout(
     barmode = "stack",
-    title = "percentage of women who have the final say on their health care within country",
+    title = "percentage of women who have the final say on their health care within Country",
     xaxis = list(title = " "), 
     yaxis = list(title = " "),
     legend = list(title = list(text = "Response Category"))
@@ -407,7 +413,7 @@ save_plotly_screenshot(fig3_ahcdm, "fig3_ahcdm.png")
 knitr::include_graphics("ahcdm.png")
 ```
 
-The chart shows women’s reported autonomy and roles in health care decision-making by `country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
+The chart shows women’s reported autonomy and roles in health care decision-making by `Country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
 
 ### Output
 
@@ -520,8 +526,8 @@ SAVE OUTFILE='C:\Users\Desktop\KE8-TZ8-ir-ipv.SAV'
 *Version 29.0.2.0 (20)
 Naming conventions for CROSS TABULATIONS results for further analysis
 1. ipv: percentage of women slapped in last 12 month (frequency), variable code= (DVPSLAPFQ)
-2. fgm: percentage of ever circumcised women within country, variable code= (FCCIRC)
-3. ahcdm: percentage of women who have the final say on their health care within country, variable code= (FCCIRC)
+2. fgm: percentage of ever circumcised women within Country, variable code= (FCCIRC)
+3. ahcdm: percentage of women who have the final say on their health care within Country, variable code= (FCCIRC)
 
 
 *Load datset.
@@ -533,21 +539,21 @@ Naming conventions for CROSS TABULATIONS results for further analysis
 DATASET ACTIVATE DataSet1.
 
 CROSSTABS
-  /TABLES=COUNTRY BY DVPSLAPFQ
+  /TABLES=Country BY DVPSLAPFQ
   /FORMAT=AVALUE TABLES
   /CELLS=COUNT ROW COLUMN 
   /COUNT ROUND CELL.
 
 
 CROSSTABS
-  /TABLES= COUNTRY BY FCCIRC
+  /TABLES= Country BY FCCIRC
   /FORMAT=AVALUE TABLES
   /CELLS=COLUMN 
   /COUNT ROUND CELL.
 
 
 CROSSTABS
-  /TABLES=COUNTRY BY DECFEMHCARE
+  /TABLES=Country BY DECFEMHCARE
   /FORMAT=AVALUE TABLES
   /CELLS=COUNT ROW COLUMN 
   /COUNT ROUND CELL..
@@ -560,8 +566,8 @@ CROSSTABS
 *For data cleaning in excel
  1. remove:
      First 3 row headings
- 2. Name col1: country
- 3. Populate country column
+ 2. Name col1: Country
+ 3. Populate Country column
  4. Filter and remove:
     - All row/col Totals
     - cols:
@@ -569,7 +575,7 @@ CROSSTABS
             Missing 
     -rows: in count/% col
              Blank
-             All rows except % within country (for fgm and ahcdm)
+             All rows except % within Country (for fgm and ahcdm)
  5.Number format is Percentage
  
  
