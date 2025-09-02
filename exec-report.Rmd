@@ -300,31 +300,27 @@ response_cols <- c(
   "don't know"
 )
 
-# Reshape to long format for plotting
-df_fgm_long <- df_fgm %>%
-  select(country, all_of(response_cols)) %>%
-  pivot_longer(
-    cols = -country,
-    names_to = "Response",
-    values_to = "Percent"
-  ) %>%
-  mutate(Response = gsub(" %", "", Response))  # Clean up response label
+# Calculate total (include 'Missing'), then get proportions
+df <- df %>%
+  rowwise() %>%
+  mutate(Total = sum(c_across(all_of(response_cols)))) %>%
+  ungroup()
 
 # Calculate percentages
 for (col in response_cols) {
   df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
 }
 
-#arrange bars in ascending order
-fgmcountry_order <- df_fgm_long %>%
-  group_by(country) %>%
-  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
-  arrange(total_percent) %>%
-  pull(country)
 
-# Set country factor levels according to ascending total percent
-df_fgm_long <- df_fgm_long %>%
-  mutate(country = factor(country, levels = fgmcountry_order))
+# Reshape to long format for plotting
+df_long <- df %>%
+  select(Country, ends_with("%")) %>%
+  pivot_longer(
+    cols = -Country,
+    names_to = "Response",
+    values_to = "Percent"
+  ) %>%
+  mutate(Response = gsub(" %", "", Response))  # Clean up response label
 
 #Generate interactive plot using Plotly
 
