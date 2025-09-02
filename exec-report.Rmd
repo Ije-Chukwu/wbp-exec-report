@@ -139,21 +139,25 @@ library(dplyr)
 sheet_names <- c("ipv", "fgm", "ahcdm")
 
 # Define cleaning function
-clean_spss_output <- function(df_raw) {
-# Set row 3 as header
-  new_header <- as.character(unlist(df_raw[3, ]))
-  colnames(df) <- new_header  # Assign new column names
+library(readxl)
+library(dplyr)
 
+# List of sheet names
+sheet_names <- c("ipv", "fgm", "ahcdm")
+
+# Define a cleaning function
+clean_spss_output <- function(df) {
   df %>%
-    # Remove rows 1-2 and last row in cleaned table
-    slice(-(1:2), -n()) %>%
-    # Remove columns 1 and last column
+    # Remove first 3 rows and last row
+    slice(-(1:3), -n()) %>%
+    # Remove first column and last column
     select(-1, -ncol(.)) %>%
-    # Rename column 2 to 'country'
-    rename(country = 2) %>%
-    # Remove columns named 'Missing' and 'Not in Universe col' if present
-    select(-any_of(c("Missing", "Not in Universe col")))
+    # Rename second column to 'country'
+    rename(country = 1) %>%
+    # Convert columns 2 to end to numeric
+    mutate(across(2:ncol(.), as.numeric))
 }
+
 # Read and clean each sheet
 cleaned_data <- lapply(sheet_names, function(sheet) {
   df_raw <- read_excel("ipv-fgm-ahcdm-spss-output.xlsx", sheet = sheet)
@@ -167,6 +171,59 @@ fgm_clean <- cleaned_data$fgm
 ahcdm_clean <- cleaned_data$ahcdm
 
 ```
+
+
+```{r rename-cols-del-missing-niu-total}
+#Rename categories columns and delete Missing, NIU and Total Values
+
+df_ipv <- ipv_clean %>%
+  select(
+    1:ncol(.)
+  ) %>%
+  rename(country=1,
+    `Not ever slapped` = 2,
+    `Often during last 12 months` = 3,
+    `Sometimes during last 12 months` = 4,
+    `Not at all in last 12 months` = 5,
+    `Yes, timing and frequency unknown` = 6
+  )
+# Delete columns 8:9
+df_ipv <- df_ipv %>% select(-any_of(c("...8","...9","...10")))
+
+
+
+df_fgm <- fgm_clean %>%
+  select(
+    1:ncol(.)
+  ) %>%
+  rename(country=1,
+  `no`=2,
+  `yes`=3,
+  `don't know`=4,
+  )
+# Delete columns 6:8,10:12
+df_fgm <- df_fgm %>% select(-any_of(c("...6","...7","...8")))
+
+
+df_ahcdm <- ahcdm_clean %>%
+  select(
+    1:ncol(.)
+  ) %>%
+  rename(country=1,
+`Woman alone`=2,
+  `Woman and husband/partner`=3,
+  `Woman and someone else`=4,
+  `Husband/partner`=5,
+  `Family elders/relatives`=8
+)
+
+# Delete columns 6:7,9:10
+df_ahcdm <- df_ahcdm %>%
+  select(-any_of(c("...7","...8","...9","...10","...11")))
+
+
+```
+
 
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
@@ -235,7 +292,7 @@ This plot presents the distribution of women's reported experiences with intimat
 ```{r fgm-percentage-plot}
 # Read data
 
-df_fgm <- read_excel("percentage of ever circumcised women within country.xlsx", sheet = "sheet1")
+df_fgm <- df_fgm
 
 response_cols <- c(
   "no",
@@ -252,6 +309,11 @@ df_fgm_long <- df_fgm %>%
     values_to = "Percent"
   ) %>%
   mutate(Response = gsub(" %", "", Response))  # Clean up response label
+
+# Calculate percentages
+for (col in response_cols) {
+  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
+}
 
 #arrange bars in ascending order
 fgmcountry_order <- df_fgm_long %>%
@@ -295,7 +357,7 @@ This plot presents the percentage response of women who have experienced female 
 ```{r ahcdm-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
 # Read data
 
-dfahcdm <- read_excel("percentage of women who have the final say on their health care within country.xlsx", sheet = "sheet1")
+df_ahcdm <- df_ahcdm
 
 #Define response categories
 response_ahcdm <- c(
@@ -307,7 +369,7 @@ response_ahcdm <- c(
 )
 
 # Reshape to long format for plotting
-ahcdm_long <- dfahcdm %>%
+ahcdm_long <- df_ahcdm %>%
   select(country, all_of(response_ahcdm)) %>%
   pivot_longer(
     cols = -country,
