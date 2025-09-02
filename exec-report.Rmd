@@ -2,10 +2,10 @@
 title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
   SCIENCE SCIENCE'
 output:
-  word_document: default
-  always_allow_html: true
   html_document:
     css: justify.css
+  word_document: default
+  always_allow_html: true
 ---
 
 ```{r header, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
@@ -29,7 +29,7 @@ cat('
 ------------------------------------------------------------------------
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(include = FALSE)
 packages<- c("rmarkdown","knitr","dplyr","plotly","readxl")
 to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
 if (length(to_install))install.packages(to_install, repos = "https://cran.rstudio.com")
@@ -98,22 +98,7 @@ A structured, reproducible workflow was developed to merge DHS Individual Recode
 
 Exploratory data analysis was done using datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized DHS survey datasets across countries and over time. Initial Cross-tabulations was done for key variables using SPSS, SPSS output tables were cleaned excel with steps documented (see [Appendix 2](Appendix 2) ) and results imported into R to create visual interactive plots.
 
-##### Summary Statistics:
-
-| Col1             |                                                |                                     | N       | Total percentage Within Country  |
-|---------|--------------------------------|---------------|---------|---------|
-| IPV (2,448,954)  | Frequency of Slapped within the last 12 months | Not ever slapped                    | 388,952 | 15.9                             |
-|                  |                                                | Often during the last 12 months     | 18,184  | 0.7                              |
-|                  |                                                | Sometimes during the last 12 months | 72,491  | 3.0                              |
-|                  |                                                | Not at all in last 12 months        | 44,941  | 1.8                              |
-|                  |                                                | Yes, timing and frequency unknown   | 2,044   | 0.1                              |
-|                  |                                                |                                     |         |                                  |
-|                  |                                                |                                     |         |                                  |
-|                  |                                                |                                     |         |                                  |
-
-
-
-```{r lib}
+```{r lib, include=FALSE}
 
 library(plotly)
 library(dplyr)
@@ -124,7 +109,7 @@ library(forcats)
 
 ```
 
-```{r read-clean-data}
+```{r read-clean-data, include=FALSE}
 # Read data
 
 library(readxl)
@@ -173,7 +158,7 @@ ahcdm_clean <- cleaned_data$ahcdm
 ```
 
 
-```{r rename-cols-del-missing-niu-total}
+```{r rename-cols-del-missing-niu-total, include=FALSE}
 #Rename categories columns and delete Missing, NIU and Total Values
 
 df_ipv <- ipv_clean %>%
@@ -228,7 +213,10 @@ df_ahcdm <- df_ahcdm %>%
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
 # Read data
-```{r ipv-percentage-plot}
+```{r ipv-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(forcats)
+
 df_ipv <- df_ipv
 response_ipv <- c(
   "Not ever slapped",
@@ -261,7 +249,7 @@ df_ipv_long <- df_ipv %>%
 
 #Generate interactive plot using plotly
 
-fig1_ipv <- plot_ly(
+fig_ipv <- plot_ly(
   df_ipv_long,
   y = ~Country,
   x = ~Percent,
@@ -277,11 +265,14 @@ fig1_ipv <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-fig1_ipv
+fig_ipv
 
 #save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
-knitr::include_graphics("ipv.png")
 
+```
+```{r ipv-plot-img}
+knitr::include_graphics("fig1_ipv.png")
+knitr::include_graphics("fig2_ipv.png")
 ```
 
 
@@ -289,7 +280,7 @@ This plot presents the distribution of women's reported experiences with intimat
 
 ##### II. FGM: percentage of ever circumcised women within Country, variable code= (FCCIRC)
 
-```{r fgm-percentage-plot}
+```{r fgm-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
 # Read data
 
 df_fgm <- df_fgm
@@ -303,7 +294,7 @@ fgm_response_cols <- c(
 # Calculate total (include 'Missing'), then get proportions
 df_fgm <- df_fgm %>%
   rowwise() %>%
-  mutate(Total = sum(c_across(all_of(response_cols)))) %>%
+  mutate(Total = sum(c_across(all_of(fgm_response_cols)))) %>%
   ungroup()
 
 # Calculate percentages
@@ -324,7 +315,7 @@ df_fgm_long <- df_fgm %>%
 
 #Generate interactive plot using Plotly
 
-fig2_fgm <- plot_ly(
+fig_fgm <- plot_ly(
   df_fgm_long,
   y = ~Country,
   x = ~Percent,
@@ -340,24 +331,25 @@ fig2_fgm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-fig2_fgm
 
-#save_plotly_screenshot(fig2_fgm, "fig2_fgm.png")
-#knitr::include_graphics("fgm.png")
+#save_plotly_screenshot(fig_fgm, "fig_fgm.png")
 
+```
+
+```{r fgm-plot-img}
+knitr::include_graphics("fig3_fgm.png")
 ```
 
 This plot presents the percentage response of women who have experienced female genital mutilation/cutting (FGM/C) within Country, with responses categorized as "yes," "no," and "don't know." There is wide Country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts. The significant Country-to-Country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
 
 ##### III. AHCDM: percentage of women who have the final say on their health care within Country, variable code= DECFEMHCARE
 
-```{r ahcdm-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
-# Read data
+```{r ahcdm-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(forcats)
 
 df_ahcdm <- df_ahcdm
-
-#Define response categories
-response_ahcdm <- c(
+ahcdm_response_col <- c(
   "Woman alone",
   "Woman and husband/partner",
   "Woman and someone else",
@@ -365,9 +357,21 @@ response_ahcdm <- c(
   "Family elders/relatives"
 )
 
+# Calculate total (include 'Missing'), then get proportions
+df_ahcdm <- df_ahcdm %>%
+  rowwise() %>%
+  mutate(Total = sum(c_across(all_of(ahcdm_response_col)))) %>%
+  ungroup()
+
+# Calculate percentages
+for (col in ahcdm_response_col) {
+  df_ahcdm [[paste0(col, " %")]] <- 100 * df_ahcdm[[col]] / df_ahcdm$Total
+}
+
+
 # Reshape to long format for plotting
-ahcdm_long <- df_ahcdm %>%
-  select(Country, all_of(response_ahcdm)) %>%
+df_ahcdm_long <- df_ahcdm %>%
+  select(Country, ends_with("%")) %>%
   pivot_longer(
     cols = -Country,
     names_to = "Response",
@@ -375,22 +379,10 @@ ahcdm_long <- df_ahcdm %>%
   ) %>%
   mutate(Response = gsub(" %", "", Response))  # Clean up response label
 
-
-#arrange bars in ascending order
-ahcdmCountry_order <- ahcdm_long %>%
-  group_by(Country) %>%
-  summarize(total_percent = sum(Percent, na.rm = TRUE)) %>%
-  arrange(total_percent) %>%
-  pull(Country)
-
-# Set Country factor levels according to ascending total percent
-ahdcm_long <- ahcdm_long %>%
-  mutate(Country = factor(Country, levels = ahcdmCountry_order))
-
 #Generate interactive plot using Plotly
 
 fig3_ahcdm <- plot_ly(
-  ahcdm_long,
+  df_ahcdm_long,
   y = ~Country,
   x = ~Percent,
   color = ~Response,
@@ -404,8 +396,14 @@ fig3_ahcdm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-save_plotly_screenshot(fig3_ahcdm, "fig3_ahcdm.png")
-knitr::include_graphics("ahcdm.png")
+#save_plotly_screenshot(fig_ahcdm, "fig_ahcdm.png")
+
+```
+
+
+```{r ahcdm-plot-img}
+knitr::include_graphics("fig4_ahcdm.png")
+knitr::include_graphics("fig5_ahcdm.png")
 ```
 
 The chart shows women’s reported autonomy and roles in health care decision-making by `Country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
@@ -577,3 +575,12 @@ CROSSTABS
 
 
 ```
+
+### Appendix 3
+_Abbreviations_
+- DHS
+- IPUMS
+- USAID
+- LMICs
+- All IPUMS Variable abbreviations available on [IPUMS-DHS](https://www.idhsdata.org/idhs-action/variables/group).
+
