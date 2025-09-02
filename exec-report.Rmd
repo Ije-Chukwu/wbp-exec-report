@@ -1,11 +1,6 @@
 ---
-title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
-  SCIENCE SCIENCE'
-output:
-  word_document: default
-  always_allow_html: true
-  html_document:
-    css: justify.css
+format: revealjs
+editor: visual
 ---
 
 ```{r header, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
@@ -30,7 +25,7 @@ cat('
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-packages<- c("dplyr","plotly","readxl")
+packages<- c("rmarkdown","knitr","dplyr","plotly","readxl")
 to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
 if (length(to_install))install.packages(to_install, repos = "https://cran.rstudio.com")
 lapply(packages,library,character.only=TRUE)
@@ -243,19 +238,19 @@ response_ipv <- c(
 )
 
 # Calculate total (include 'Missing'), then get proportions
-df <- df_ipv %>%
+df_ipv <- df_ipv %>%
   rowwise() %>%
   mutate(Total = sum(c_across(all_of(response_ipv)))) %>%
   ungroup()
 
 # Calculate percentages
 for (col in response_ipv) {
-  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
+  df_ipv[[paste0(col, " %")]] <- 100 * df_ipv[[col]] / df_ipv$Total
 }
 
 
 # Reshape to long format for plotting
-df_ipv_long <- df %>%
+df_ipv_long <- df_ipv %>%
   select(Country, ends_with("%")) %>%
   pivot_longer(
     cols = -Country,
@@ -287,7 +282,7 @@ fig1_ipv <- plot_ly(
 
 fig1_ipv
 
-knitr::include_graphics("ipv.png")
+#knitr::include_graphics("ipv.png")
 
 ```
 
@@ -314,12 +309,12 @@ df_fgm <- df_fgm %>%
 
 # Calculate percentages
 for (col in fgm_response_cols) {
-  df[[paste0(col, " %")]] <- 100 * df[[col]] / df$Total
+  df_fgm[[paste0(col, " %")]] <- 100 * df_fgm[[col]] / df_fgm$Total
 }
 
 
 # Reshape to long format for plotting
-df_long <- df_fgm %>%
+df_fgm_long <- df_fgm %>%
   select(Country, ends_with("%")) %>%
   pivot_longer(
     cols = -Country,
@@ -346,9 +341,10 @@ fig2_fgm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
+fig2_fgm
 
-save_plotly_screenshot(fig2_fgm, "fig2_fgm.png")
-knitr::include_graphics("fgm.png")
+#save_plotly_screenshot(fig2_fgm, "fig2_fgm.png")
+#knitr::include_graphics("fgm.png")
 
 ```
 
