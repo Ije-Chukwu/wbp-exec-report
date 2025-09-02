@@ -13,3 +13,5 @@ uoa-logo.png
 *.xlsx
 exec-report.log
 *.png
+*.html
+exec-report.html
