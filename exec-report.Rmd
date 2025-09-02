@@ -1,10 +1,9 @@
 ---
-title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
-  SCIENCE SCIENCE'
+title: '    '
 output:
-  word_document: default
   html_document:
     css: justify.css
+  word_document: default
   always_allow_html: true
 ---
 
@@ -29,7 +28,7 @@ cat('
 ------------------------------------------------------------------------
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(include = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 packages<- c("rmarkdown","knitr","dplyr","plotly","readxl")
 to_install<-packages[!(packages%in%installed.packages()[,"Package"])]
 if (length(to_install))install.packages(to_install, repos = "https://cran.rstudio.com")
@@ -52,6 +51,8 @@ save_plotly_screenshot <- function(plotly_obj, file_png, width = 800, height = 6
 
 
 ```
+
+# EXECUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA SCIENCE SCIENCE
 
 ## Project Topic: DHS Data Management and Analysis of Gender Inequality in Reproductive Women across LMICs using IPUMS-DHS Dataset
 
@@ -98,7 +99,7 @@ A structured, reproducible workflow was developed to merge DHS Individual Recode
 
 Exploratory data analysis was done using datasets from [IPUMS-DHS website](https://www.idhsdata.org/idhs/) which are harmonized DHS survey datasets across countries and over time. Initial Cross-tabulations was done for key variables using SPSS, SPSS output tables were cleaned excel with steps documented (see [Appendix 2](Appendix%202) ) and results imported into R to create visual interactive plots.
 
-```{r lib, include=FALSE}
+```{r lib, echo=TRUE, message=FALSE, warning=FALSE}
 
 library(plotly)
 library(dplyr)
@@ -109,7 +110,7 @@ library(forcats)
 
 ```
 
-```{r read-clean-data, include=FALSE}
+```{r read-clean-data, echo=TRUE, message=FALSE, warning=FALSE}
 # Read data
 
 library(readxl)
@@ -157,7 +158,7 @@ ahcdm_clean <- cleaned_data$ahcdm
 
 ```
 
-```{r rename-cols-del-missing-niu-total, include=FALSE}
+```{r rename-cols-del-missing-niu-total, echo=TRUE, message=FALSE, warning=FALSE}
 #Rename categories columns and delete Missing, NIU and Total Values
 
 df_ipv <- ipv_clean %>%
@@ -210,7 +211,7 @@ df_ahcdm <- df_ahcdm %>%
 
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
-```{r ipv-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
+```{r ipv-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
 library(plotly)
 library(forcats)
 
@@ -268,16 +269,16 @@ fig_ipv
 
 ```
 
-```{r ipv-plot-img, echo=TRUE}
-knitr::include_graphics("fig1_ipv.png")
-knitr::include_graphics("fig2_ipv.png")
+```{r ipv-plot-img, echo=TRUE, message=FALSE, warning=FALSE}
+#knitr::include_graphics("fig1_ipv.png")
+#knitr::include_graphics("fig2_ipv.png")
 ```
 
 This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
 
 ##### II. FGM: percentage of ever circumcised women within Country, variable code= (FCCIRC)
 
-```{r fgm-percentage-plot, message=FALSE, warning=FALSE, include=FALSE}
+```{r fgm-percentage-plot,echo=TRUE, message=FALSE, warning=FALSE}
 # Read data
 
 df_fgm <- df_fgm
@@ -328,20 +329,21 @@ fig_fgm <- plot_ly(
     legend = list(title = list(text = "Response Category"))
   )
 
-
+fig_fgm
 #save_plotly_screenshot(fig_fgm, "fig_fgm.png")
 
 ```
 
-```{r fgm-plot-img,echo=TRUE}
-knitr::include_graphics("fig3_fgm.png")
+```{r fgm-plot-img, echo=TRUE, message=FALSE, warning=FALSE}
+#knitr::include_graphics("fig3_fgm.png")
 ```
 
 This plot presents the percentage response of women who have experienced female genital mutilation/cutting (FGM/C) within Country, with responses categorized as "yes," "no," and "don't know." There is wide Country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and Egypt show extremely high percentages of women reporting being circumcised (often over 80%), while countries such as Ghana, Cameroon, Tanzania, and others report relatively low response rate. The "don't know" response is almost negligible in most contexts. The significant Country-to-Country differences reflects varying cultural, legal, and historical norms about FGM/C practices.
 
 ##### III. AHCDM: percentage of women who have the final say on their health care within Country, variable code= DECFEMHCARE
 
-```{r ahcdm-percentage-plot, echo=FALSE, message=FALSE, warning=FALSE}
+```{r ahcdm-percentage-plot, echo=TRUE, message=FALSE, warning=FALSE}
+
 library(plotly)
 library(forcats)
 
@@ -378,7 +380,7 @@ df_ahcdm_long <- df_ahcdm %>%
 
 #Generate interactive plot using Plotly
 
-fig3_ahcdm <- plot_ly(
+fig_ahcdm <- plot_ly(
   df_ahcdm_long,
   y = ~Country,
   x = ~Percent,
@@ -392,14 +394,14 @@ fig3_ahcdm <- plot_ly(
     yaxis = list(title = " "),
     legend = list(title = list(text = "Response Category"))
   )
-
+fig_ahcdm
 #save_plotly_screenshot(fig_ahcdm, "fig_ahcdm.png")
 
 ```
 
-```{r ahcdm-plot-img, echo=TRUE, warning=FALSE}
-knitr::include_graphics("fig4_ahcdm.png")
-knitr::include_graphics("fig5_ahcdm.png")
+```{r ahcdm-plot-img, echo=TRUE, message=FALSE, warning=FALSE}
+#knitr::include_graphics("fig4_ahcdm.png")
+#knitr::include_graphics("fig5_ahcdm.png")
 ```
 
 The chart shows women’s reported autonomy and roles in health care decision-making by `Country` and response categories `response_ahcdm`. In many countries, the largest proportion of women say decisions are made “with their husband/partner” or by their “husband/partner” alone, reflecting persistent gender norms around health autonomy. However, countries such as Mozambique, Lesotho, and Madagascar display higher shares for “Woman alone,” indicating stronger female decision-making autonomy. “Woman and someone else” and “Family elders/relatives” are minor categories in most contexts, suggesting these are less common arrangements for household health decisions.
@@ -549,24 +551,16 @@ CROSSTABS
 *-----------------------------------------------------------------------.
 
 
-*For data cleaning in excel
- 1. remove:
-     First 3 row headings
- 2. Name col1: Country
- 3. Populate Country column
+*For data cleaning in r
+ 1. set row 3 as header
+ 2. remove:
+     rows: 1-2,last
+     col: 1,last
+ 3. rename col2: country
  4. Filter and remove:
-    - All row/col Totals
     - cols:
+            Missing
             Not in Universe col
-            Missing 
-    -rows: in count/% col
-             Blank
-             All rows except % within Country (for fgm and ahcdm)
- 5.Number format is Percentage
- 
- 
-
-
 ```
 
 ### Appendix 3

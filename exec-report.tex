@@ -1,0 +1,460 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={EXECUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA SCIENCE SCIENCE},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{EXECUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN
+HEALTH DATA SCIENCE SCIENCE}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{Project Topic: DHS Data Management and Analysis of Gender
+Inequality in Reproductive Women across LMICs using IPUMS-DHS
+Dataset}\label{project-topic-dhs-data-management-and-analysis-of-gender-inequality-in-reproductive-women-across-lmics-using-ipums-dhs-dataset}
+
+\subsubsection{Project Background}\label{project-background}
+
+The Biostatistics and Health Data Science Group, is a multi-disciplinary
+academic research and teaching under the IAHS characteristic by
+collaborative research, consultancy and training across clinical,
+biological and global health domains. In the global health domain where
+I was assigned to, the data used to conduct the research as well as for
+training purposes are collected from a number of secure sources,
+including the \href{https://dhsprogram.com}{The DHS-Program}.
+
+The DHS-Program, funded by USAID collects nationally representative
+global health data, to monitor and evaluate population, health, and
+nutrition programs, providing data to track approximately 30 SDG
+indicators. They provides these data for tracking as well as measure to
+track them, contributing significantly towards achieving the SDG 3 and 5
+(The DHS Program, 2025).
+
+However, the DHS-Program has been suspended and currently undergoing
+review for further funding. During the period of this review, new
+registrations are not being accepted, hence restricting access to
+datasets commonly used by undergraduate and post graduate students for
+their theses and training, especially in LMICs, thereby significantly
+hampering preparations for future national and global health leadership
+training in addition to other far-reaching effects.
+
+My project focused on collecting, organizing, merging and analyzing,
+datasets from DHS-program relevant to our global health projects. While
+this mitigates the recent suspension of the DHS-program for students and
+researchers within the team working on global health projects, it also
+gave me an opportunity to familiarize with global health data and
+perform exploratory data analysis on aspects of Gender Inequality
+including Female Genital Mutilation, Intimate Partner Violence and
+Autonomy of Health Care Decision Making which are often intertwined and
+are prevalent issues for women of child bearing age in LMICs(Wessells \&
+Kostelny, 2022).
+
+\subsubsection{Project Aim}\label{project-aim}
+
+This project achieved two aims
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Created a global health data repository of DHS Datasets for 38 years
+  (1984-2022)
+\item
+  Pooled Cross Country Exploratory Data Analysis of Gender Inequalities
+  in women of child bearing age.
+\end{enumerate}
+
+\subsubsection{Methods}\label{methods}
+
+The project was carried out in three phases and documentation was
+ensured for transparency and reproducibility of the workflow and
+analysis results.
+
+The data was from DHS-Program website using my supervisor's login. To
+access datasets, new users must
+\href{https://dhsprogram.com/data/new-user-registration.cfm}{register
+for an account} on the \href{https://dhsprogram.com}{The DHS-Program}
+website.
+
+\paragraph{Phase 1: Auto-download of DHS
+Datasets}\label{phase-1-auto-download-of-dhs-datasets}
+
+A structured reproducible workflow was scripted using R Markdown which
+serves as a comprehensive toolkit for accessing, processing, and locally
+managing DHS downloads, enabling seamless data retrieval for
+collaborative research in support of global health studies. It ensure
+secure data access, automates downloads, and systematically unzips,
+organizes and saves the datasets in hierarchical file
+structure.\texttt{FileName/CountryName/SurveyYear/DataType}. The
+workflow is specifically for DHS Datasets in SPSS and STATA formats as
+specified in my project tasks.
+
+\paragraph{Phase 2: DHS IR File Merge (Pilot
+merge)}\label{phase-2-dhs-ir-file-merge-pilot-merge}
+
+A structured, reproducible workflow was developed to merge DHS
+Individual Recode (IR) datasets for 2 countries (Kenya and Tanzania
+2022) using SPSS Syntax. A cross-Country unique identifiers
+\texttt{UCASEID} was created by concatenating Country-cluster and case
+IDs. Subsets containing the \texttt{UCASEID} and relevant IPV variables
+were saved and merged using SPSS commands. This workflow can be adapted
+for additional countries and survey rounds, and replicated for different
+variables, provided that the variable names, labels, and meanings are
+first confirmed to be consistent according to the DHS Recode Manual (The
+DHS Program, 2025). See syntax of workflow in
+\href{Appendix\%201}{Appendix 1}.
+
+\paragraph{Phase 3: Exploratory Data Analysis and Results using
+IPUMS-DHS
+Data}\label{phase-3-exploratory-data-analysis-and-results-using-ipums-dhs-data}
+
+Exploratory data analysis was done using datasets from
+\href{https://www.idhsdata.org/idhs/}{IPUMS-DHS website} which are
+harmonized DHS survey datasets across countries and over time. Initial
+Cross-tabulations was done for key variables using SPSS, SPSS output
+tables were cleaned excel with steps documented (see
+\href{Appendix\%202}{Appendix 2} ) and results imported into R to create
+visual interactive plots.
+
+\subparagraph{I. IPV: Percentage of Women Slapped in Last 12 month
+(frequency) by an Intimate Partner, variable code=
+(DVPSLAPFQ)}\label{i.-ipv-percentage-of-women-slapped-in-last-12-month-frequency-by-an-intimate-partner-variable-code-dvpslapfq}
+
+This plot presents the distribution of women's reported experiences with
+intimate partner violence (IPV) across countries. The response
+categories include: ``Not ever slapped,'' ``Often during last 12
+months,'' ``Sometimes during last 12 months,'' ``Not at all in last 12
+months,'' and ``Yes, timing and frequency unknown.'' Most countries show
+that a significant proportion of women have never been slapped by an
+intimate partner, but in many settings, notable percentages report being
+slapped at least sometimes or often within the past year. Variability
+across countries is visible, with some (e.g., Sao Tome and Principe,
+Zimbabwe) having higher frequencies of violence, and others (e.g.,
+India, Senegal) showing larger shares of respondents reporting no
+experience of IPV.
+
+\subparagraph{II. FGM: percentage of ever circumcised women within
+Country, variable code=
+(FCCIRC)}\label{ii.-fgm-percentage-of-ever-circumcised-women-within-country-variable-code-fccirc}
+
+This plot presents the percentage response of women who have experienced
+female genital mutilation/cutting (FGM/C) within Country, with responses
+categorized as ``yes,'' ``no,'' and ``don't know.'' There is wide
+Country variation: nations like Guinea, Sierra Leone, Mali, Gambia, and
+Egypt show extremely high percentages of women reporting being
+circumcised (often over 80\%), while countries such as Ghana, Cameroon,
+Tanzania, and others report relatively low response rate. The ``don't
+know'' response is almost negligible in most contexts. The significant
+Country-to-Country differences reflects varying cultural, legal, and
+historical norms about FGM/C practices.
+
+\subparagraph{III. AHCDM: percentage of women who have the final say on
+their health care within Country, variable code=
+DECFEMHCARE}\label{iii.-ahcdm-percentage-of-women-who-have-the-final-say-on-their-health-care-within-country-variable-code-decfemhcare}
+
+The chart shows women's reported autonomy and roles in health care
+decision-making by \texttt{Country} and response categories
+\texttt{response\_ahcdm}. In many countries, the largest proportion of
+women say decisions are made ``with their husband/partner'' or by their
+``husband/partner'' alone, reflecting persistent gender norms around
+health autonomy. However, countries such as Mozambique, Lesotho, and
+Madagascar display higher shares for ``Woman alone,'' indicating
+stronger female decision-making autonomy. ``Woman and someone else'' and
+``Family elders/relatives'' are minor categories in most contexts,
+suggesting these are less common arrangements for household health
+decisions.
+
+\paragraph{Output}\label{output}
+
+Output files including dataset, analysis and results are saved to One
+drive folder in the below order
+
+\begin{verbatim}
+DHS-Download Task
+├── [DHS_Downloads]
+└── [Downloads report, metadata, log]
+
+[Gender Inequalities]
+├── [DHS]
+│   ├── [dhs-ir-piolt-merge-KE8_TZ8]
+│   └── [planning-and-var-map]
+└── [IPUMS]
+    ├── [ipums-analysis]
+    │   ├── [r-project-files-exec-report]
+    │   └── [spss-analysis]
+    ├── [ipums-data-extracts-comd-files]
+    ├── [ipums-ir-dataset]
+    └── [ipums-planning-and-var-map]
+
+    
+\end{verbatim}
+
+\subsubsection{Implications for the
+Organisation:}\label{implications-for-the-organisation}
+
+\begin{itemize}
+\tightlist
+\item
+  Easy access to DHS Global Datasets.
+\item
+  Data Preservation pending the resumption of the DHS program and
+  mitigation against possible future program suspension.
+\item
+  Continuity of trainings, including future and ongoing training and
+  projects by students and researchers working on global health
+  projects.
+\end{itemize}
+
+\subsubsection{References}\label{references}
+
+The DHS Program. (2025).\emph{Sustainable Development Goals.}
+\url{https://dhsprogram.com/topics/sdgs/index.cfm} (Accessed August 28,
+2025)
+
+The DHS Program. (2025). \emph{Merging datasets.}
+\url{https://dhsprogram.com/data/Merging-datasets.cfm} (Accessed
+September 1, 2025)
+
+Wessells, M. G., \& Kostelny, K. (2022). The psychosocial impacts of
+intimate partner violence against women in LMIC contexts: Toward a
+holistic approach. \emph{International Journal of Environmental Research
+and Public Health, 19(21), 14488.}
+\url{https://doi.org/10.3390/ijerph192114488}*
+
+\subsubsection{Appendix 1}\label{appendix-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{*}\NormalTok{SPSS}
+\SpecialCharTok{*}\NormalTok{ Encoding}\SpecialCharTok{:}\NormalTok{ UTF}\FloatTok{{-}8.}
+\SpecialCharTok{*}\NormalTok{SPSS Version }\DecValTok{30}\NormalTok{.}\DecValTok{0}\NormalTok{.}\FloatTok{0.0}\NormalTok{(}\DecValTok{172}\NormalTok{)}
+\SpecialCharTok{*}\NormalTok{  Encoding}\SpecialCharTok{:}\NormalTok{ UTF}\FloatTok{{-}8.}
+
+
+\SpecialCharTok{*}\NormalTok{Check Recode file to confirm  variable names context match. For this pilot merging, KEIR8CFL.SAV and TZIR82FL.SAV were conducted }\ControlFlowTok{in}\NormalTok{ the same year and survey }\FunctionTok{phase}\NormalTok{ (Ist Survey conducted }\ControlFlowTok{in}\NormalTok{ DHS Phase }\DecValTok{8}\NormalTok{, }\ControlFlowTok{in} \DecValTok{2022}\NormalTok{).}
+
+\SpecialCharTok{*}\NormalTok{KEIR8CFL.SAV however is a continuous DHS Dataset. Create a copy of original dataset as these changes will over}\SpecialCharTok{{-}}\NormalTok{write the original dataset. UNless otherwise specified as }\ControlFlowTok{in}\NormalTok{ Step }\DecValTok{2}
+
+\SpecialCharTok{*}\NormalTok{STep1}\SpecialCharTok{:}\NormalTok{ Create Unique ID using V000 and Case ID variables from both files. to merge from Dataset }\DecValTok{1}\NormalTok{( KEIR8CFL.SAV )}
+
+\SpecialCharTok{*}\NormalTok{Unique ID }\ControlFlowTok{for}\NormalTok{ Kenya; Dataset }\DecValTok{1}\NormalTok{( KEIR8CFL.SAV ).}
+
+\NormalTok{DATASET ACTIVATE DataSet1.}
+\NormalTok{STRING  }\FunctionTok{UCASEID}\NormalTok{ (A20).}
+\NormalTok{COMPUTE UCASEID}\OtherTok{=}\FunctionTok{CONCAT}\NormalTok{(V000,CASEID).}
+\NormalTok{VARIABLE LABELS  UCASEID }\StringTok{\textquotesingle{}Unique Case ID\textquotesingle{}}\NormalTok{.}
+\NormalTok{EXECUTE.}
+
+
+\SpecialCharTok{*}\NormalTok{Unique ID }\ControlFlowTok{for}\NormalTok{ Tanzania; Dataset }\DecValTok{2}\NormalTok{( TZIR82FL.SAV ).}
+
+\NormalTok{DATASET ACTIVATE DataSet2.}
+\NormalTok{STRING  }\FunctionTok{UCASEID}\NormalTok{ (A20).}
+\NormalTok{COMPUTE UCASEID}\OtherTok{=}\FunctionTok{CONCAT}\NormalTok{(V000,CASEID).}
+\NormalTok{VARIABLE LABELS  UCASEID }\StringTok{\textquotesingle{}Unique Case ID\textquotesingle{}}\NormalTok{.}
+\NormalTok{EXECUTE.}
+
+
+
+\SpecialCharTok{*}\NormalTok{Step }\DecValTok{2}\SpecialCharTok{:}\NormalTok{ Select Unique case ID along with IPV variables from both datasets }\ControlFlowTok{for}\NormalTok{ merging. Save them with a different name. Modify file path.}
+
+\NormalTok{DATASET ACTIVATE DataSet1.}
+\NormalTok{SAVE OUTFILE}\OtherTok{=}\StringTok{\textquotesingle{}C:\textbackslash{}Users\textbackslash{}Desktop\textbackslash{}\_KEIR8CFL.SAV\textquotesingle{}}
+  \SpecialCharTok{/}\NormalTok{KEEP UCASEID V000 V001 V003 V004 V005 V006 V007 G100 G101 G102 G103 G104 G105 G107 V005.}
+
+\NormalTok{DATASET ACTIVATE DataSet2.}
+\NormalTok{SAVE OUTFILE}\OtherTok{=}\StringTok{\textquotesingle{}C:\textbackslash{}Users\textbackslash{}Desktop\textbackslash{}\_TZIR82FL.SAV\textquotesingle{}}
+  \SpecialCharTok{/}\NormalTok{KEEP UCASEID V000 V001 V003 V004 V005 V006 V007 G100 G101 G102 G103 G104 G105 G107 V005.}
+
+\SpecialCharTok{*}\NormalTok{Open \_KEIR8CFL.SAV and \_TZIR82FL.SAV as Datasets }\DecValTok{3}\NormalTok{ and }\DecValTok{4}\NormalTok{ respectively}
+
+
+\SpecialCharTok{*}\NormalTok{Step }\DecValTok{3}\SpecialCharTok{:}\NormalTok{ Merge all variables.}
+\NormalTok{DATASET ACTIVATE DataSet3.}
+\NormalTok{ADD FILES }\SpecialCharTok{/}\NormalTok{FILE}\OtherTok{=}\ErrorTok{*}
+  \ErrorTok{/}\NormalTok{FILE}\OtherTok{=}\StringTok{\textquotesingle{}DataSet4\textquotesingle{}}\NormalTok{.}
+\NormalTok{EXECUTE.}
+
+\SpecialCharTok{*}\NormalTok{By default, the active }\FunctionTok{dataset}\NormalTok{ (Dataset3 \_KEIR8CFL.SAV) is modified to contain the merged cases from the other }\FunctionTok{dataset}\NormalTok{ (Dataset4  \_TZIR82FL.SAV).}
+
+
+\NormalTok{SAVE OUTFILE}\OtherTok{=}\StringTok{\textquotesingle{}C:\textbackslash{}Users\textbackslash{}Desktop\textbackslash{}KE8{-}TZ8{-}ir{-}ipv.SAV\textquotesingle{}}
+  \SpecialCharTok{/}\NormalTok{COMPRESSED.}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Appendix 2}\label{appendix-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\SpecialCharTok{*}\NormalTok{ Encoding}\SpecialCharTok{:}\NormalTok{ UTF}\DecValTok{{-}8}
+\SpecialCharTok{*}\NormalTok{Version }\DecValTok{29}\NormalTok{.}\DecValTok{0}\NormalTok{.}\FloatTok{2.0}\NormalTok{ (}\DecValTok{20}\NormalTok{)}
+\NormalTok{Naming conventions }\ControlFlowTok{for}\NormalTok{ CROSS TABULATIONS results }\ControlFlowTok{for}\NormalTok{ further analysis}
+\FloatTok{1.}\NormalTok{ ipv}\SpecialCharTok{:}\NormalTok{ percentage of women slapped }\ControlFlowTok{in}\NormalTok{ last }\DecValTok{12} \FunctionTok{month}\NormalTok{ (frequency), variable code}\OtherTok{=}\NormalTok{ (DVPSLAPFQ)}
+\FloatTok{2.}\NormalTok{ fgm}\SpecialCharTok{:}\NormalTok{ percentage of ever circumcised women within Country, variable code}\OtherTok{=}\NormalTok{ (FCCIRC)}
+\FloatTok{3.}\NormalTok{ ahcdm}\SpecialCharTok{:}\NormalTok{ percentage of women who have the final say on their health care within Country, variable code}\OtherTok{=}\NormalTok{ (FCCIRC)}
+
+
+\SpecialCharTok{*}\NormalTok{Load datset.}
+\NormalTok{ GET}
+\NormalTok{  FILE}\OtherTok{=}\StringTok{\textquotesingle{}C:\textbackslash{}Users\textbackslash{}Desktop\textbackslash{}ipums{-}ir{-}dataset.sav\textquotesingle{}}\NormalTok{.}
+
+
+
+\NormalTok{DATASET ACTIVATE DataSet1.}
+
+\NormalTok{CROSSTABS}
+  \SpecialCharTok{/}\NormalTok{TABLES}\OtherTok{=}\NormalTok{Country BY DVPSLAPFQ}
+  \SpecialCharTok{/}\NormalTok{FORMAT}\OtherTok{=}\NormalTok{AVALUE TABLES}
+  \SpecialCharTok{/}\NormalTok{CELLS}\OtherTok{=}\NormalTok{COUNT ROW COLUMN }
+  \SpecialCharTok{/}\NormalTok{COUNT ROUND CELL.}
+
+
+\NormalTok{CROSSTABS}
+  \SpecialCharTok{/}\NormalTok{TABLES}\OtherTok{=}\NormalTok{ Country BY FCCIRC}
+  \SpecialCharTok{/}\NormalTok{FORMAT}\OtherTok{=}\NormalTok{AVALUE TABLES}
+  \SpecialCharTok{/}\NormalTok{CELLS}\OtherTok{=}\NormalTok{COLUMN }
+  \SpecialCharTok{/}\NormalTok{COUNT ROUND CELL.}
+
+
+\NormalTok{CROSSTABS}
+  \SpecialCharTok{/}\NormalTok{TABLES}\OtherTok{=}\NormalTok{Country BY DECFEMHCARE}
+  \SpecialCharTok{/}\NormalTok{FORMAT}\OtherTok{=}\NormalTok{AVALUE TABLES}
+  \SpecialCharTok{/}\NormalTok{CELLS}\OtherTok{=}\NormalTok{COUNT ROW COLUMN }
+  \SpecialCharTok{/}\NormalTok{COUNT ROUND CELL..}
+
+
+
+\SpecialCharTok{*{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}}\NormalTok{.}
+
+
+\SpecialCharTok{*}\NormalTok{For data cleaning }\ControlFlowTok{in}\NormalTok{ excel}
+ \FloatTok{1.}\NormalTok{ remove}\SpecialCharTok{:}
+\NormalTok{     First }\DecValTok{3}\NormalTok{ row headings}
+ \FloatTok{2.}\NormalTok{ Name col1}\SpecialCharTok{:}\NormalTok{ Country}
+ \FloatTok{3.}\NormalTok{ Populate Country column}
+ \FloatTok{4.}\NormalTok{ Filter and remove}\SpecialCharTok{:}
+    \SpecialCharTok{{-}}\NormalTok{ All row}\SpecialCharTok{/}\NormalTok{col Totals}
+    \SpecialCharTok{{-}}\NormalTok{ cols}\SpecialCharTok{:}
+\NormalTok{            Not }\ControlFlowTok{in}\NormalTok{ Universe col}
+\NormalTok{            Missing }
+    \SpecialCharTok{{-}}\NormalTok{rows}\SpecialCharTok{:} \ControlFlowTok{in}\NormalTok{ count}\SpecialCharTok{/}\NormalTok{\% col}
+\NormalTok{             Blank}
+\NormalTok{             All rows except \% within }\FunctionTok{Country}\NormalTok{ (}\ControlFlowTok{for}\NormalTok{ fgm and ahcdm)}
+ \FloatTok{5.}\NormalTok{Number format is Percentage}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Appendix 3}\label{appendix-3}
+
+\emph{Abbreviations} - DHS - IPUMS - USAID - LMICs - All IPUMS Variable
+abbreviations available on
+\href{https://www.idhsdata.org/idhs-action/variables/group}{IPUMS-DHS}.
+
+\end{document}
