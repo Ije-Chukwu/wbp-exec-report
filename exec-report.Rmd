@@ -1,6 +1,11 @@
 ---
-format: revealjs
-editor: visual
+title: 'EXCUTIVE REPORT (PART A): PROFESSIONAL WORK BASED PLACEMENT IN HEALTH DATA
+  SCIENCE SCIENCE'
+output:
+  word_document: default
+  always_allow_html: true
+  html_document:
+    css: justify.css
 ---
 
 ```{r header, results='asis', echo=FALSE, out.width='110%', out.height='15%', fig.align='center'}
@@ -222,13 +227,9 @@ df_ahcdm <- df_ahcdm %>%
 
 ##### I. IPV: Percentage of Women Slapped in Last 12 month (frequency) by an Intimate Partner, variable code= (DVPSLAPFQ)
 
+# Read data
 ```{r ipv-percentage-plot}
-library(plotly)
-library(dplyr)
-library(readxl)
-library(tidyr)
-library(forcats)
-
+df_ipv <- df_ipv
 response_ipv <- c(
   "Not ever slapped",
   "Often during last 12 months",
@@ -247,7 +248,6 @@ df_ipv <- df_ipv %>%
 for (col in response_ipv) {
   df_ipv[[paste0(col, " %")]] <- 100 * df_ipv[[col]] / df_ipv$Total
 }
-
 
 # Reshape to long format for plotting
 df_ipv_long <- df_ipv %>%
@@ -271,20 +271,19 @@ fig1_ipv <- plot_ly(
 ) %>%
   layout(
     barmode = "stack",
-    title = "Percentage of Women Ever Slapped by an Intimate Partner within the Last 12 Months",
-    yaxis = list(title = "Country"),
-    xaxis = list(
-      title = "within Country %",
-      categoryorder = "total ascending"
-    ),
+    title = "Women Slapped in Last 12 Months",
+    yaxis = list(title = "Country", categoryorder = "total ascending"),
+    xaxis = list(title = "Percent of Respondents"),
     legend = list(title = list(text = "Response Category"))
   )
 
 fig1_ipv
 
-#knitr::include_graphics("ipv.png")
+#save_plotly_screenshot(fig1_ipv, "fig1_ipv.png")
+knitr::include_graphics("ipv.png")
 
 ```
+
 
 This plot presents the distribution of women's reported experiences with intimate partner violence (IPV) across countries. The response categories include: "Not ever slapped," "Often during last 12 months," "Sometimes during last 12 months," "Not at all in last 12 months," and "Yes, timing and frequency unknown." Most countries show that a significant proportion of women have never been slapped by an intimate partner, but in many settings, notable percentages report being slapped at least sometimes or often within the past year. Variability across countries is visible, with some (e.g., Sao Tome and Principe, Zimbabwe) having higher frequencies of violence, and others (e.g., India, Senegal) showing larger shares of respondents reporting no experience of IPV.
 
